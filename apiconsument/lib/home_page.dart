@@ -19,8 +19,8 @@ class HomePage extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: () async {
           // The JSONPlaceholder API always responds with whatever was passed in the POST request
-          final response = await Provider.of<ApiService>(context)
-              .postPost({'key': 'value'});
+          final response =
+              await Provider.of<ApiService>(context).postPost({'key': 'value'});
           // We cannot really add any new posts using the placeholder API,
           // so just print the response to the console
           print(response.body);
@@ -40,6 +40,8 @@ class HomePage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           // Snapshot's data is the Response
           // You can see there's no type safety here (only List<dynamic>)
+          // print(snapshot.data!.bodyString);
+          // if (snapshot.data.bodyString != null)
           final List posts = json.decode(snapshot.data!.bodyString);
           return _buildPosts(context, posts);
         } else {
@@ -79,3 +81,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
