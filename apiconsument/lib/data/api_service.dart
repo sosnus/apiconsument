@@ -34,6 +34,22 @@ abstract class ApiService extends ChopperService {
         // The generated implementation
         _$ApiService(),
       ],
+
+      interceptors: [HttpLoggingInterceptor(), CurlInterceptor()],
+      // interceptors: [
+      //   (Request request) async {
+      //     if (request.method == HttpMethod.Post) {
+      //       chopperLogger.info('Performed a POST request');
+      //     }
+      //     return request;
+      //   },
+      //   (Response response) async {
+      //     if (response.statusCode == 404) {
+      //       chopperLogger.severe('404 NOT FOUND');
+      //     }
+      //     return response;
+      //   },
+      // ],
       // Converts data to & from JSON and adds the application/json header.
       converter: JsonConverter(),
     );

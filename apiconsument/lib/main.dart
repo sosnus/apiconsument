@@ -5,7 +5,12 @@ import 'package:provider/provider.dart';
 import 'data/api_service.dart';
 import 'home_page.dart';
 
-void main() => runApp(MyApp());
+import 'package:logging/logging.dart';
+
+void main() {
+  _setupLogging();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -22,4 +27,12 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+void _setupLogging() {
+  // Logger.root.level = Level.ALL;
+  Logger.root.level = Level.INFO;
+  Logger.root.onRecord.listen((rec) {
+    print('${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
 }
