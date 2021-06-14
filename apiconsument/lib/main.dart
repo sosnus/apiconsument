@@ -1,9 +1,10 @@
+import 'package:apiconsument/page_home.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
-import 'home_page.dart';
+// import 'home_page.dart';
 
 import 'package:logging/logging.dart';
 
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       dispose: (context, ApiService service) => service.client.dispose(),
       child: MaterialApp(
         title: 'Material App',
-        home: HomePage(),
+        home: PageHome(),
+        // home: HomePage(),
       ),
     );
   }
