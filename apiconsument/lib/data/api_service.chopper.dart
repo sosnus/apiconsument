@@ -17,22 +17,50 @@ class _$ApiService extends ApiService {
   final definitionType = ApiService;
 
   @override
+  Future<Response<dynamic>> userById(int id) {
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/user/$id';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> usersAll() {
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/users';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> officeById(int id) {
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/office/$id';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> officeAll() {
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/offices';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> getPosts() {
-    final $url = 'https://jsonplaceholder.typicode.com/posts';
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/posts';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
 
   @override
   Future<Response<dynamic>> getPost(int id) {
-    final $url = 'https://jsonplaceholder.typicode.com/posts/$id';
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/posts/$id';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
 
   @override
   Future<Response<dynamic>> postPost(Map<String, dynamic> body) {
-    final $url = 'https://jsonplaceholder.typicode.com/posts';
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081';
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);

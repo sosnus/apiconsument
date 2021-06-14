@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:apiconsument/page_list.dart';
+import 'package:apiconsument/page_list_offices.dart';
+import 'package:apiconsument/page_list_users.dart';
 import 'package:flutter/material.dart';
 import 'package:chopper/chopper.dart';
 import 'package:provider/provider.dart';
@@ -41,11 +43,6 @@ class PageHome extends StatelessWidget {
       future: Provider.of<ApiService>(context).getPosts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          // Snapshot's data is the Response
-          // You can see there's no type safety here (only List<dynamic>)
-          // print(snapshot.data!.bodyString);
-          // if (snapshot.data.bodyString != null)
-          final List posts = json.decode(snapshot.data!.bodyString);
           return _buildPosts(context, menu);
         } else {
           // Show a loading indicator while waiting for the posts
@@ -91,17 +88,21 @@ class PageHome extends StatelessWidget {
           // builder: (context) => SinglePostPage(postId: int(id)),
         ),
       );
-    else if (selectedItem == menu[1])
+    else if (selectedItem == menu[1]) // Users!!!!!!!!!!!!!!!!!!!!
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => PageRequests(),
+          builder: (context) => PageListUsers(
+            listName: selectedItem,
+          ),
           // builder: (context) => SinglePostPage(postId: int(id)),
         ),
       );
-    else if (selectedItem == menu[2])
+    else if (selectedItem == menu[2]) // Offices
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => PageRequests(),
+          builder: (context) => PageListOffices(
+            listName: selectedItem,
+          ),
           // builder: (context) => SinglePostPage(postId: int(id)),
         ),
       );

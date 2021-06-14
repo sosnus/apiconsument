@@ -7,10 +7,10 @@ import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
 
-class PageList extends StatelessWidget {
+class PageListOffices extends StatelessWidget {
   final String listName;
 
-  const PageList({
+  const PageListOffices({
     Key? key,
     required this.listName,
   }) : super(key: key);
@@ -65,7 +65,7 @@ class PageList extends StatelessWidget {
     return FutureBuilder<Response>(
       // In real apps, use some sort of state management (BLoC is cool)
       // to prevent duplicate requests when the UI rebuilds
-      future: Provider.of<ApiService>(context).getPosts(),
+      future: Provider.of<ApiService>(context).officeAll(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // Snapshot's data is the Response
@@ -93,10 +93,10 @@ class PageList extends StatelessWidget {
           elevation: 4,
           child: ListTile(
             title: Text(
-              posts[index]['title'],
+              posts[index]['city'],
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(posts[index]['body']),
+            subtitle: Text(posts[index]['type']),
             onTap: () => _navigateToPost(context, posts[index]['id']),
           ),
         );

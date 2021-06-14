@@ -4,9 +4,22 @@ import 'package:chopper/chopper.dart';
 // In order for the source gen to know which file to generate and which files are "linked", you need to use the part keyword.
 part 'api_service.chopper.dart';
 
-@ChopperApi(baseUrl: 'https://jsonplaceholder.typicode.com/posts')
+// @ChopperApi(baseUrl: 'https://jsonplaceholder.typicode.com')
+@ChopperApi(baseUrl: 'http://s-vm.northeurope.cloudapp.azure.com:8081')
 abstract class ApiService extends ChopperService {
-  @Get()
+  @Get(path: '/user/{id}')
+  Future<Response> userById(@Path('id') int id);
+
+  @Get(path: '/users')
+  Future<Response> usersAll();
+
+  @Get(path: '/office/{id}')
+  Future<Response> officeById(@Path('id') int id);
+
+  @Get(path: '/offices')
+  Future<Response> officeAll();
+
+  @Get(path: '/posts')
   Future<Response> getPosts();
 
 // @Get(headers: {'Constant-Header-Name': 'Header-Value'})
@@ -15,7 +28,7 @@ abstract class ApiService extends ChopperService {
 //   @Header('Changeable-Header-Name') String headerValue,
 // ]);
 
-  @Get(path: '/{id}')
+  @Get(path: '/posts/{id}')
   // Query parameters are specified the same way as @Path
   // but obviously with a @Query annotation
   Future<Response> getPost(@Path('id') int id);
