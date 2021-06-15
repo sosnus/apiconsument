@@ -20,17 +20,17 @@ class PageHome extends StatelessWidget {
         title: Text('Api client'),
       ),
       body: _buildBody(context),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () async {
-          // The JSONPlaceholder API always responds with whatever was passed in the POST request
-          final response =
-              await Provider.of<ApiService>(context).postPost({'key': 'value'});
-          // We cannot really add any new posts using the placeholder API,
-          // so just print the response to the console
-          print(response.body);
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.add),
+      //   onPressed: () async {
+      //     // The JSONPlaceholder API always responds with whatever was passed in the POST request
+      //     final response =
+      //         await Provider.of<ApiService>(context).postPost({'key': 'value'});
+      //     // We cannot really add any new posts using the placeholder API,
+      //     // so just print the response to the console
+      //     print(response.body);
+      //   },
+      // ),
     );
   }
 

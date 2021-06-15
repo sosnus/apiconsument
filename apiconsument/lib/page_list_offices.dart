@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:apiconsument/page_add_offices.dart';
 import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,13 @@ class PageListOffices extends StatelessWidget {
         title: Text('List: ' + listName),
       ),
       body: _buildList(context),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () => _navigateToAddOffice(context),
+        // onPressed: _navigateToAddOffice(context),
+        // onPressed: _navigateToPost(context, id),
+      ),
+      // floatingActionButton: ,
 
       // FutureBuilder<Response>(
       //   future: Provider.of<ApiService>(context).getPosts(),
@@ -108,6 +116,14 @@ class PageListOffices extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SinglePostPage(postId: id),
+      ),
+    );
+  }
+
+  void _navigateToAddOffice(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PageAddOffices(),
       ),
     );
   }
