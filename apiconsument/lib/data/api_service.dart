@@ -22,6 +22,9 @@ abstract class ApiService extends ChopperService {
   @Get(path: '/posts')
   Future<Response> getPosts();
 
+  @Get(path: '/roles')
+  Future<Response> getRoles();
+
 // @Get(headers: {'Constant-Header-Name': 'Header-Value'})
 // Future<Response> getPosts([
 //   // Parameter headers are suitable for ones which values need to change

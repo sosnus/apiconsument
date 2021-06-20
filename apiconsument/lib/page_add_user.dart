@@ -7,11 +7,16 @@ import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
 
-class PageAddUser extends StatelessWidget {
+class PageAddUser extends StatefulWidget {
   PageAddUser({
     Key? key,
   }) : super(key: key);
 
+  @override
+  _PageAddUserState createState() => _PageAddUserState();
+}
+
+class _PageAddUserState extends State<PageAddUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,17 +34,25 @@ class PageAddUser extends StatelessWidget {
   }
 
   final _formKey = GlobalKey<FormState>();
+  List roleList = [];
+
   TextEditingController form_id_EditingController = TextEditingController();
+
   TextEditingController form_first_name_EditingController =
       TextEditingController();
+
   TextEditingController form_middle_name_EditingController =
       TextEditingController();
+
   TextEditingController form_surname_name_EditingController =
       TextEditingController();
+
   TextEditingController form_gender_EditingController = TextEditingController();
+
   TextEditingController form_pesel_EditingController = TextEditingController();
 
   _formAddNewUser(BuildContext context) {
+    // roleL
     return Form(
       key: _formKey,
       child: ListView(
@@ -113,6 +126,7 @@ class PageAddUser extends StatelessWidget {
               return null;
             },
           ),
+          roleDropdownWidget(),
           TextFormField(
             controller: form_pesel_EditingController,
             decoration: const InputDecoration(
@@ -134,6 +148,33 @@ class PageAddUser extends StatelessWidget {
     );
   }
 
+  String dropdownValue = 'One';
+  Widget roleDropdownWidget() {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_drop_down),
+      iconSize: 24,
+      elevation: 16,
+      // style: const TextStyle(color: Colors.deepPurple),
+      // underline: Container(
+      // height: 2,
+      // color: Colors.deepPurpleAccent,
+      // ),
+      onChanged: (String? newValue) {
+        setState(() {
+          dropdownValue = newValue!;
+        });
+      },
+      items: <String>['One', 'Two', 'Free', 'Four']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+
   _sendRequest(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       //     // If the form is valid, display a snackbar. In the real world,
@@ -148,16 +189,5 @@ class PageAddUser extends StatelessWidget {
     print(form_gender_EditingController.text);
     print(form_pesel_EditingController.text);
   }
-
-  // _sendRequest(BuildContext context) {}
-
-  // processingForm(BuildContext context) {
-  //   // Validate returns true if the form is valid, or false otherwise.
-  //   if (_formKey.currentState!.validate()) {
-  //     // If the form is valid, display a snackbar. In the real world,
-  //     // you'd often call a server or save the information in a database.
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text('Processing Data')));
-  //   }
 }
 // }
