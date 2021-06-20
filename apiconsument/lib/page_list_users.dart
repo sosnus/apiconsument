@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:apiconsument/page_add_user.dart';
 import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,11 @@ class PageListUsers extends StatelessWidget {
         title: Text('List: ' + listName),
       ),
       body: _buildList(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _navigateToUserAddPage(context),
+        child: const Icon(Icons.add),
+        // backgroundColor: Colors.green,
+      ),
 
       // FutureBuilder<Response>(
       //   future: Provider.of<ApiService>(context).getPosts(),
@@ -108,6 +114,16 @@ class PageListUsers extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SinglePostPage(postId: id),
+      ),
+    );
+  }
+
+  _navigateToUserAddPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PageAddUser(),
+        // builder: (context) => PageRequests(selectedItem),
+        // builder: (context) => SinglePostPage(postId: int(id)),
       ),
     );
   }
