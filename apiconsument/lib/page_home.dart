@@ -19,7 +19,8 @@ class PageHome extends StatelessWidget {
       appBar: AppBar(
         title: Text('Api client'),
       ),
-      body: _buildBody(context),
+      // body: _buildBody(context),
+      body: _buildPosts(context, menu),
       // floatingActionButton: FloatingActionButton(
       //   child: Icon(Icons.add),
       //   onPressed: () async {
@@ -40,7 +41,7 @@ class PageHome extends StatelessWidget {
     return FutureBuilder<Response>(
       // In real apps, use some sort of state management (BLoC is cool)
       // to prevent duplicate requests when the UI rebuilds
-      future: Provider.of<ApiService>(context).getPosts(),
+      // future: Provider.of<ApiService>(context).getPosts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return _buildPosts(context, menu);
