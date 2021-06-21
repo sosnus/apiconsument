@@ -137,7 +137,10 @@ class _PageAddUserState extends State<PageAddUser> {
           //     return null;
           //   },
           // ),
-          roleRadiobutton(),
+          Text("todo:"),
+          Text("Radiobutton Role"),
+          Text("Radiobutton Office:"),
+          roleRadiobuttonGender(),
           roleDropdownWidget(),
           TextFormField(
             controller: form_pesel_EditingController,
@@ -179,7 +182,36 @@ class _PageAddUserState extends State<PageAddUser> {
 
   String dropdownValue = RolesCollection.getRole(0).asString();
 
-  Widget roleRadiobutton() => Column(
+  Widget roleRadiobuttonGender() => Column(
+        children: <Widget>[
+          ListTile(
+            title: const Text('Man'),
+            leading: Radio<Gender>(
+              value: Gender.M,
+              groupValue: _selectedGender,
+              onChanged: (Gender? value) {
+                setState(() {
+                  _selectedGender = value;
+                });
+              },
+            ),
+          ),
+          ListTile(
+            title: const Text('Woman'),
+            leading: Radio<Gender>(
+              value: Gender.W,
+              groupValue: _selectedGender,
+              onChanged: (Gender? value) {
+                setState(() {
+                  _selectedGender = value;
+                });
+              },
+            ),
+          ),
+        ],
+      );
+
+  Widget roleRadiobuttonRole() => Column(
         children: <Widget>[
           ListTile(
             title: const Text('Man'),
