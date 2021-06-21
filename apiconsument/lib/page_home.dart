@@ -114,7 +114,6 @@ class PageHome extends StatelessWidget {
           builder: (context) => PageListCars(
             listName: selectedItem,
           ),
-          // builder: (context) => SinglePostPage(postId: int(id)),
         ),
       );
     else

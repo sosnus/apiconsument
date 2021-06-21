@@ -53,6 +53,14 @@ class _$ApiService extends ApiService {
   }
 
   @override
+  Future<Response<dynamic>> deleteCarByPlateNumber(String plate_number) {
+    final $url =
+        'http://s-vm.northeurope.cloudapp.azure.com:8081/_car/$plate_number';
+    final $request = Request('DELETE', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> carAll() {
     final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/cars';
     final $request = Request('GET', $url, client.baseUrl);

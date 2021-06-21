@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:apiconsument/page_add_offices.dart';
+import 'package:apiconsument/page_delete_car.dart';
 import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
 import 'data/car.dart';
+import 'page_list_cars.dart';
 
 class PageOneCar extends StatelessWidget {
   final String plate_number;
@@ -23,7 +25,31 @@ class PageOneCar extends StatelessWidget {
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.delete),
-        onPressed: () => _navigateToAddOffice(context),
+        // onPressed: () => _navigateToAddOffice(context),
+        onPressed: () => showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('Are You sure to delete car?'),
+            content: Text('Plate number: ' + plate_number),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PageDeleteCar(
+                      plate_number: plate_number,
+                    ),
+                  ),
+                ),
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        ),
+        // onPressed: () => _navigateToAddOffice(context),
       ),
     );
   }
