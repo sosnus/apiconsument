@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:apiconsument/page_list.dart';
+import 'package:apiconsument/page_list_cars.dart';
 import 'package:apiconsument/page_list_offices.dart';
 import 'package:apiconsument/page_list_users.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,15 @@ class PageHome extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PageListOffices(
+            listName: selectedItem,
+          ),
+          // builder: (context) => SinglePostPage(postId: int(id)),
+        ),
+      );
+    else if (selectedItem == menu[3]) // Cars
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PageListCars(
             listName: selectedItem,
           ),
           // builder: (context) => SinglePostPage(postId: int(id)),
