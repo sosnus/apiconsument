@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Car {
   final String plateNumber; // key
   final String licenseNumber;
@@ -54,5 +56,26 @@ class Car {
         vinNumber +
         '\nassigned ' +
         assigned.toString();
+  }
+
+  Widget convertToWidgetList() {
+    // List fields = [];
+    Map<String, dynamic> myJsonFields = this.toJson();
+    Iterable<String> myJsonFieldsKeys = myJsonFields.keys;
+    Iterable<dynamic> myJsonFieldsValues = myJsonFields.values;
+    return ListView.builder(
+        itemCount: myJsonFields.length,
+        padding: EdgeInsets.all(8),
+        itemBuilder: (context, index) {
+          return Card(
+            elevation: 4,
+            child: ListTile(
+                title: Text(
+                  myJsonFieldsValues.elementAt(index).toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(myJsonFieldsKeys.elementAt(index))),
+          );
+        });
   }
 }

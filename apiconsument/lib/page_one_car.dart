@@ -55,11 +55,26 @@ class PageOneCar extends StatelessWidget {
 
   Widget _buildPosts(BuildContext context, Car myCar) {
     print(myCar.toString());
+    return myCar.convertToWidgetList();
+    // return ListView(children: myCar.convertToWidgetList());
+    // Card(
+    //   elevation: 4,
+    //   child: ListTile(
+    //     title: Text(
+    //       myCar.licenseNumber,
+    //       style: TextStyle(fontWeight: FontWeight.bold),
+    //     ),
+    //     // subtitle: Text(posts[index]['body']),
+    //   ),
+    // ),
+    // ]
+    // );
+    // return Column(child: ScrollView(c));
     // return ListView.builder(
     //   itemCount: posts.length,
     //   padding: EdgeInsets.all(8),
     //   itemBuilder: (context, index) {
-    return Text(myCar.toString());
+    // return Text(myCar.toString());
     // return Card(
     //   elevation: 4,
     //   child: ListTile(
