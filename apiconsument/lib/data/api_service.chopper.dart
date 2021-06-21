@@ -69,6 +69,14 @@ class _$ApiService extends ApiService {
   }
 
   @override
+  Future<Response<dynamic>> postNewUser(Map<String, dynamic> myUser) {
+    final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/user';
+    final $body = myUser;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> carAll() {
     final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/cars';
     final $request = Request('GET', $url, client.baseUrl);

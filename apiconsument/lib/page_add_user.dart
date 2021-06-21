@@ -1,10 +1,14 @@
 import 'package:intl/intl.dart';
 import 'package:apiconsument/data/roles_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'data/api_service.dart';
 import 'data/user.dart';
 
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+import 'page_after_add_user.dart';
 
 class PageAddUser extends StatefulWidget {
   PageAddUser({
@@ -33,7 +37,8 @@ class _PageAddUserState extends State<PageAddUser> {
   final _formKey = GlobalKey<FormState>();
   List roleList = [];
 
-  TextEditingController form_id_EditingController = TextEditingController();
+  TextEditingController form_temporaryId_toDelete_this_field_EditingController =
+      TextEditingController(); // form_id_EditingController
 
   TextEditingController form_first_name_EditingController =
       TextEditingController();
@@ -64,7 +69,7 @@ class _PageAddUserState extends State<PageAddUser> {
         padding: EdgeInsets.all(8.0),
         children: <Widget>[
           TextFormField(
-            controller: form_id_EditingController,
+            controller: form_temporaryId_toDelete_this_field_EditingController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               labelText: 'Id (id)',
@@ -148,20 +153,20 @@ class _PageAddUserState extends State<PageAddUser> {
                         DateFormat('yyyy-MM-dd').format(value!));
               },
               child: Text(
-                "📅 " + form_birthDate_EditingController.text,
+                "📅    " + form_birthDate_EditingController.text,
               )),
-          TextFormField(
-            controller: form_birthDate_EditingController,
-            decoration: const InputDecoration(
-              labelText: 'birth, birth, birth',
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
+          // TextFormField(
+          //   controller: form_birthDate_EditingController,
+          //   decoration: const InputDecoration(
+          //     labelText: 'birth, birth, birth',
+          //   ),
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return 'Please enter some text';
+          //     }
+          //     return null;
+          //   },
+          // ),
         ],
       ),
     );
@@ -196,16 +201,27 @@ class _PageAddUserState extends State<PageAddUser> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Processing Data')));
     }
-    User tempUser = new User(
+    User myUser = new User(
+      int.parse(form_temporaryId_toDelete_this_field_EditingController.text),
       form_first_name_EditingController.text,
       form_middle_name_EditingController.text,
       form_surname_name_EditingController.text,
       form_pesel_EditingController.text,
       form_gender_EditingController.text,
       form_birthDate_EditingController.text,
-      int.parse(form_roleId_EditingController.text),
-      int.parse(form_officeId_EditingController.text),
+      1,
+      1,
+      // int.parse(form_roleId_EditingController.text),
+      // int.parse(form_officeId_EditingController.text),
     );
+    print(myUser.toString());
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PageAfterAddUser(user: myUser),
+      ),
+    );
+    // Provider.of<ApiService>(context).postNewUser(myUser.toJson());
   }
 
   Future<DateTime?> selectDatetime() async {
@@ -216,7 +232,7 @@ class _PageAddUserState extends State<PageAddUser> {
     }, onConfirm: (date) {
       print('confirm $date');
     },
-        currentTime: DateTime.utc(1990, 12, 31, 23, 12, 34),
+        currentTime: DateTime.utc(1990, 6, 15, 23, 12, 34),
         locale: LocaleType.en);
   }
 }

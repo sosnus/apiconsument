@@ -1,22 +1,23 @@
-import 'package:apiconsument/page_add_offices.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+import 'data/user.dart';
 import 'page_home.dart';
-import 'page_list_cars.dart';
+import 'page_list_users.dart';
+import 'page_add_offices.dart';
 
-class PageDeleteCar extends StatelessWidget {
-  final String plate_number;
+class PageAfterAddUser extends StatelessWidget {
+  final User user;
 
-  const PageDeleteCar({Key? key, required this.plate_number}) : super(key: key);
+  const PageAfterAddUser({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Car removed: ' + plate_number),
+        title: Text('User added: ' + user.id.toString()),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -28,8 +29,9 @@ class PageDeleteCar extends StatelessWidget {
 
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
-      future:
-          Provider.of<ApiService>(context).deleteCarByPlateNumber(plate_number),
+      future: Provider.of<ApiService>(context).postNewUser(user.toJson()),
+
+      // future: Provider.of<ApiService>(context).deleteUserById(user_id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final String myRespond = snapshot.data!.bodyString;
@@ -50,14 +52,13 @@ class PageDeleteCar extends StatelessWidget {
         ElevatedButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => PageListCars(
-                listName: 'Cars',
+              builder: (context) => PageListUsers(
+                listName: 'Users',
               ),
             ),
           ),
-          child: Text("Go to car list"),
+          child: Text("Go to user list"),
         ),
-        Text(myRespond),
         ElevatedButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
