@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'package:apiconsument/data/roles_collection.dart';
 import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
@@ -64,7 +64,7 @@ class _PageAddUserState extends State<PageAddUser> {
   TextEditingController form_officeId_EditingController =
       TextEditingController();
 
-  String dateTimeFromPicker = "todo";
+  // String dateTimeFromPicker = "todo";
 
   _formAddNewUser(BuildContext context) {
     // roleL
@@ -154,16 +154,39 @@ class _PageAddUserState extends State<PageAddUser> {
               return null;
             },
           ),
+          // Row(
+          // children: [
           ElevatedButton(
               onPressed: () {
+                // assignDatetimeToEditingController(
+                // selectDatetime(), form_birthDate_EditingController);
+
+                selectDatetime().then((value) =>
+                    form_birthDate_EditingController.text =
+                        DateFormat('yyyy-MM-dd').format(value!));
+                // value!.toIso8601String());
+
                 // dateTimeFromPicker = await
-                selectDatetime();
-                print(dateTimeFromPicker);
+                // print(dateTimeFromPicker);
               },
               child: Text(
-                'Select birth date: ' + dateTimeFromPicker,
+                "📅 " + form_birthDate_EditingController.text,
                 // style: TextStyle(color: Colors.blue),
               )),
+          TextFormField(
+            controller: form_birthDate_EditingController,
+            decoration: const InputDecoration(
+              labelText: 'birth, birth, birth',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          // ],
+          // ),
 
           // ElevatedButton(
           //   onPressed: processingForm(context),
@@ -227,7 +250,7 @@ class _PageAddUserState extends State<PageAddUser> {
     );
   }
 
-  selectDatetime() async {
+  Future<DateTime?> selectDatetime() async {
     return DatePicker.showDatePicker(context, showTitleActions: true,
         onChanged: (date) {
       print('change $date in time zone ' +
@@ -238,5 +261,11 @@ class _PageAddUserState extends State<PageAddUser> {
         currentTime: DateTime.utc(1990, 12, 31, 23, 12, 34),
         locale: LocaleType.en);
   }
+
+  // void assignDatetimeToEditingController(Future<DateTime?> selectDatetime,
+  // TextEditingController form_birthDate_EditingController) {
+  // form_birthDate_EditingController.text = selectDatetime.toString();
+  // selectDatetime.then((value) => form_birthDate_EditingController.text);
+  // }
 }
 // }
