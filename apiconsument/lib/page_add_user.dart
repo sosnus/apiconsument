@@ -30,8 +30,6 @@ class _PageAddUserState extends State<PageAddUser> {
       ),
       body: _formAddNewUser(context),
       floatingActionButton: FloatingActionButton(
-        // onPressed: () {},
-        //  => _sendRequest(context),
         onPressed: () => _sendRequest(context),
         child: const Icon(Icons.send),
       ),
@@ -64,8 +62,6 @@ class _PageAddUserState extends State<PageAddUser> {
   TextEditingController form_officeId_EditingController =
       TextEditingController();
 
-  // String dateTimeFromPicker = "todo";
-
   _formAddNewUser(BuildContext context) {
     // roleL
     return Form(
@@ -75,11 +71,8 @@ class _PageAddUserState extends State<PageAddUser> {
         children: <Widget>[
           TextFormField(
             controller: form_id_EditingController,
-            // initialValue: "44",
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-              // icon: Icon(Icons.person),
-              // hintText: 'What do people call you?',
               labelText: 'Id (id)',
             ),
             // The validator receives the text that the user has entered.
@@ -154,24 +147,14 @@ class _PageAddUserState extends State<PageAddUser> {
               return null;
             },
           ),
-          // Row(
-          // children: [
           ElevatedButton(
               onPressed: () {
-                // assignDatetimeToEditingController(
-                // selectDatetime(), form_birthDate_EditingController);
-
                 selectDatetime().then((value) =>
                     form_birthDate_EditingController.text =
                         DateFormat('yyyy-MM-dd').format(value!));
-                // value!.toIso8601String());
-
-                // dateTimeFromPicker = await
-                // print(dateTimeFromPicker);
               },
               child: Text(
                 "📅 " + form_birthDate_EditingController.text,
-                // style: TextStyle(color: Colors.blue),
               )),
           TextFormField(
             controller: form_birthDate_EditingController,
@@ -185,39 +168,23 @@ class _PageAddUserState extends State<PageAddUser> {
               return null;
             },
           ),
-          // ],
-          // ),
-
-          // ElevatedButton(
-          //   onPressed: processingForm(context),
-          //   child: Text('Submit'),
-          // ),
         ],
       ),
     );
   }
 
-  // Role dropdownValue = RolesCollection.getRole(0);
   String dropdownValue = RolesCollection.getRole(0).asString();
-  // String dropdownValue = 'One';
   Widget roleDropdownWidget() {
     return DropdownButton<String>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_drop_down),
       iconSize: 24,
       elevation: 16,
-      // style: const TextStyle(color: Colors.deepPurple),
-      // underline: Container(
-      // height: 2,
-      // color: Colors.deepPurpleAccent,
-      // ),
       onChanged: (String? newValue) {
         setState(() {
           dropdownValue = newValue!;
         });
       },
-      // items: DropdownMenuItem<String> RolesCollection.rolesListString();
-      // items: <String>['One', 'Two', 'Free', 'Four']
       items: <String>[
         RolesCollection.getRole(0).asString(),
         RolesCollection.getRole(1).asString()
@@ -232,13 +199,10 @@ class _PageAddUserState extends State<PageAddUser> {
 
   _sendRequest(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      //     // If the form is valid, display a snackbar. In the real world,
-      //     // you'd often call a server or save the information in a database.
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Processing Data')));
     }
     User tempUser = new User(
-      //  form_id_EditingController.text,
       form_first_name_EditingController.text,
       form_middle_name_EditingController.text,
       form_surname_name_EditingController.text,
@@ -261,11 +225,4 @@ class _PageAddUserState extends State<PageAddUser> {
         currentTime: DateTime.utc(1990, 12, 31, 23, 12, 34),
         locale: LocaleType.en);
   }
-
-  // void assignDatetimeToEditingController(Future<DateTime?> selectDatetime,
-  // TextEditingController form_birthDate_EditingController) {
-  // form_birthDate_EditingController.text = selectDatetime.toString();
-  // selectDatetime.then((value) => form_birthDate_EditingController.text);
-  // }
 }
-// }
