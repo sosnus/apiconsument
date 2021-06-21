@@ -19,11 +19,17 @@ abstract class ApiService extends ChopperService {
   @Get(path: '/offices')
   Future<Response> officeAll();
 
+  @Get(path: '/car/{plate_number}')
+  Future<Response> carByPlateNumber(@Path('plate_number') String plate_number);
+
+  @Get(path: '/cars')
+  Future<Response> carAll();
+
   @Get(path: '/posts')
   Future<Response> getPosts();
 
-  @Get(path: '/roles')
-  Future<Response> getRoles();
+  // @Get(path: '/roles')
+  // Future<Response> getRoles();
 
 // @Get(headers: {'Constant-Header-Name': 'Header-Value'})
 // Future<Response> getPosts([
