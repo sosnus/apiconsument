@@ -56,7 +56,7 @@ class PageDeleteUser extends StatelessWidget {
           ),
           child: Text("Go to user list"),
         ),
-        Text(myRespond),
+        // Text(myRespond),
         ElevatedButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(

@@ -10,6 +10,10 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import 'page_after_add_user.dart';
 
+enum Gender { M, W }
+
+Gender? _selectedGender = Gender.M;
+
 class PageAddUser extends StatefulWidget {
   PageAddUser({
     Key? key,
@@ -121,18 +125,19 @@ class _PageAddUserState extends State<PageAddUser> {
               return null;
             },
           ),
-          TextFormField(
-            controller: form_gender_EditingController,
-            decoration: const InputDecoration(
-              labelText: 'Gender (gender) (char)',
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
+          // TextFormField(
+          //   controller: form_gender_EditingController,
+          //   decoration: const InputDecoration(
+          //     labelText: 'Gender (gender) (char)',
+          //   ),
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return 'Please enter some text';
+          //     }
+          //     return null;
+          //   },
+          // ),
+          roleRadiobutton(),
           roleDropdownWidget(),
           TextFormField(
             controller: form_pesel_EditingController,
@@ -173,6 +178,36 @@ class _PageAddUserState extends State<PageAddUser> {
   }
 
   String dropdownValue = RolesCollection.getRole(0).asString();
+
+  Widget roleRadiobutton() => Column(
+        children: <Widget>[
+          ListTile(
+            title: const Text('Man'),
+            leading: Radio<Gender>(
+              value: Gender.M,
+              groupValue: _selectedGender,
+              onChanged: (Gender? value) {
+                setState(() {
+                  _selectedGender = value;
+                });
+              },
+            ),
+          ),
+          ListTile(
+            title: const Text('Woman'),
+            leading: Radio<Gender>(
+              value: Gender.W,
+              groupValue: _selectedGender,
+              onChanged: (Gender? value) {
+                setState(() {
+                  _selectedGender = value;
+                });
+              },
+            ),
+          ),
+        ],
+      );
+
   Widget roleDropdownWidget() {
     return DropdownButton<String>(
       value: dropdownValue,
@@ -201,13 +236,24 @@ class _PageAddUserState extends State<PageAddUser> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Processing Data')));
     }
+
+    String extractFromEnum(Gender g) {
+      switch (g) {
+        case Gender.M:
+          return "M";
+        case Gender.W:
+          return "W";
+      }
+    }
+
     User myUser = new User(
       int.parse(form_temporaryId_toDelete_this_field_EditingController.text),
       form_first_name_EditingController.text,
       form_middle_name_EditingController.text,
       form_surname_name_EditingController.text,
       form_pesel_EditingController.text,
-      form_gender_EditingController.text,
+      // form_gender_EditingController.text,
+      extractFromEnum(_selectedGender!),
       form_birthDate_EditingController.text,
       1,
       1,
