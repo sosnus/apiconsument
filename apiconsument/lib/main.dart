@@ -23,6 +23,9 @@ class MyApp extends StatelessWidget {
       // Always call dispose on the ChopperClient to release resources
       dispose: (context, ApiService service) => service.client.dispose(),
       child: MaterialApp(
+        theme: ThemeData.from(
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green),
+        ),
         title: 'Material App',
         home: PageHome(),
         // home: HomePage(),
