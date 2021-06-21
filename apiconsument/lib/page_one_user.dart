@@ -1,17 +1,10 @@
 import 'dart:convert';
-
-import 'package:apiconsument/page_add_offices.dart';
-import 'package:apiconsument/page_delete_car.dart';
-import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'data/api_service.dart';
-import 'data/car.dart';
 import 'data/user.dart';
 import 'page_delete_user.dart';
-import 'page_list_cars.dart';
 
 class PageOneUser extends StatelessWidget {
   final String user_id;
@@ -86,18 +79,18 @@ class PageOneUser extends StatelessWidget {
   }
 }
 
-void _navigateToPost(BuildContext context, int id) {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => SinglePostPage(postId: id),
-    ),
-  );
-}
+// void _navigateToPost(BuildContext context, int id) {
+//   Navigator.of(context).push(
+//     MaterialPageRoute(
+//       builder: (context) => SinglePostPage(postId: id),
+//     ),
+//   );
+// }
 
-void _navigateToAddOffice(BuildContext context) {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => PageAddOffices(),
-    ),
-  );
-}
+// void _navigateToAddOffice(BuildContext context) {
+//   Navigator.of(context).push(
+//     MaterialPageRoute(
+//       builder: (context) => PageAddOffices(),
+//     ),
+//   );
+// }

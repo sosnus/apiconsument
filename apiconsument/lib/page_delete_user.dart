@@ -1,16 +1,11 @@
-import 'dart:convert';
-
-import 'package:apiconsument/page_add_offices.dart';
-import 'package:apiconsument/page_list_users.dart';
-import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
-import 'data/car.dart';
 import 'page_home.dart';
-import 'page_list_cars.dart';
+import 'page_list_users.dart';
+import 'page_add_offices.dart';
 
 class PageDeleteUser extends StatelessWidget {
   final String user_id;

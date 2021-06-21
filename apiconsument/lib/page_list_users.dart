@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:apiconsument/page_add_user.dart';
-import 'package:apiconsument/page_one_user.dart';
-import 'package:apiconsument/single_post_page.dart';
+import 'page_add_user.dart';
+import 'page_one_user.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

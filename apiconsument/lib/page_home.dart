@@ -1,15 +1,8 @@
-import 'dart:convert';
-
-import 'package:apiconsument/page_list.dart';
-import 'package:apiconsument/page_list_cars.dart';
-import 'package:apiconsument/page_list_offices.dart';
-import 'package:apiconsument/page_list_users.dart';
+import 'page_list.dart';
+import 'page_list_cars.dart';
+import 'page_list_offices.dart';
+import 'page_list_users.dart';
 import 'package:flutter/material.dart';
-import 'package:chopper/chopper.dart';
-import 'package:provider/provider.dart';
-
-import 'data/api_service.dart';
-// import 'single_post_page.dart';
 
 class PageHome extends StatelessWidget {
   final List<String> menu = <String>["Requests", "Users", "Offices", "Cars"];
@@ -36,25 +29,25 @@ class PageHome extends StatelessWidget {
     );
   }
 
-  FutureBuilder<Response> _buildBody(BuildContext context) {
-    // FutureBuilder is perfect for easily building UI when awaiting a Future
-    // Response is the type currently returned by all the methods of PostApiService
-    return FutureBuilder<Response>(
-      // In real apps, use some sort of state management (BLoC is cool)
-      // to prevent duplicate requests when the UI rebuilds
-      // future: Provider.of<ApiService>(context).getPosts(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return _buildPosts(context, menu);
-        } else {
-          // Show a loading indicator while waiting for the posts
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
-  }
+  // FutureBuilder<Response> _buildBody(BuildContext context) {
+  //   // FutureBuilder is perfect for easily building UI when awaiting a Future
+  //   // Response is the type currently returned by all the methods of PostApiService
+  //   return FutureBuilder<Response>(
+  //     // In real apps, use some sort of state management (BLoC is cool)
+  //     // to prevent duplicate requests when the UI rebuilds
+  //     // future: Provider.of<ApiService>(context).getPosts(),
+  //     builder: (context, snapshot) {
+  //       if (snapshot.connectionState == ConnectionState.done) {
+  //         return _buildPosts(context, menu);
+  //       } else {
+  //         // Show a loading indicator while waiting for the posts
+  //         return Center(
+  //           child: CircularProgressIndicator(),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
 
   // menu.add("Requests");
 
