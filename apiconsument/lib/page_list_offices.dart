@@ -26,48 +26,9 @@ class PageListOffices extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => _navigateToAddOffice(context),
-        // onPressed: _navigateToAddOffice(context),
-        // onPressed: _navigateToPost(context, id),
       ),
-      // floatingActionButton: ,
-
-      // FutureBuilder<Response>(
-      //   future: Provider.of<ApiService>(context).getPosts(),
-      //   // future: Provider.of<ApiService>(context).getPost(postId),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.done) {
-      //     final List posts = json.decode(snapshot.data!.bodyString);
-
-      //       // final Map post = json.decode(snapshot.data!.bodyString);
-      //       return _buildPost(posts);
-      //     } else {
-      //       return Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     }
-      //   },
-      // ),
     );
   }
-
-  // Padding _buildPost(Map post) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(8.0),
-  //     child: Column(
-  //       children: <Widget>[
-  //         Text(
-  //           post['title'],
-  //           style: TextStyle(
-  //             fontSize: 30,
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-  //         SizedBox(height: 8),
-  //         Text(post['body']),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
@@ -123,7 +84,7 @@ class PageListOffices extends StatelessWidget {
   void _navigateToAddOffice(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageAddOffices(),
+        builder: (context) => PageAddOffices(), // TODO:
       ),
     );
   }
