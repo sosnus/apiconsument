@@ -61,6 +61,14 @@ class _$ApiService extends ApiService {
   }
 
   @override
+  Future<Response<dynamic>> deleteUserById(String user_id) {
+    final $url =
+        'http://s-vm.northeurope.cloudapp.azure.com:8081/_user/$user_id';
+    final $request = Request('DELETE', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> carAll() {
     final $url = 'http://s-vm.northeurope.cloudapp.azure.com:8081/cars';
     final $request = Request('GET', $url, client.baseUrl);

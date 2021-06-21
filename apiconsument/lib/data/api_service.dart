@@ -26,6 +26,9 @@ abstract class ApiService extends ChopperService {
   Future<Response> deleteCarByPlateNumber(
       @Path('plate_number') String plate_number);
 
+  @Delete(path: '/_user/{user_id}')
+  Future<Response> deleteUserById(@Path('user_id') String user_id);
+
   @Get(path: '/cars')
   Future<Response> carAll();
 

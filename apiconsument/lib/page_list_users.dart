@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:apiconsument/page_add_user.dart';
+import 'package:apiconsument/page_one_user.dart';
 import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -103,17 +104,19 @@ class PageListUsers extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(posts[index]['firstName']),
-            onTap: () => _navigateToPost(context, posts[index]['id']),
+            onTap: () => _navigateToOneUserPage(context, posts[index]['id']),
           ),
         );
       },
     );
   }
 
-  void _navigateToPost(BuildContext context, int id) {
+  void _navigateToOneUserPage(BuildContext context, int id) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SinglePostPage(postId: id),
+        builder: (context) => PageOneUser(
+          user_id: id.toString(),
+        ),
       ),
     );
   }

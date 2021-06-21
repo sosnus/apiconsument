@@ -9,18 +9,20 @@ import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
 import 'data/car.dart';
+import 'data/user.dart';
+import 'page_delete_user.dart';
 import 'page_list_cars.dart';
 
-class PageOneCar extends StatelessWidget {
-  final String plate_number;
+class PageOneUser extends StatelessWidget {
+  final String user_id;
 
-  const PageOneCar({Key? key, required this.plate_number}) : super(key: key);
+  const PageOneUser({Key? key, required this.user_id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About car: ' + plate_number),
+        title: Text('About user: ' + user_id),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -29,8 +31,8 @@ class PageOneCar extends StatelessWidget {
         onPressed: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-            title: const Text('Are You sure to delete car?'),
-            content: Text('Plate number: ' + plate_number),
+            title: const Text('Are You sure to delete user?'),
+            content: Text('User id: ' + user_id),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -39,8 +41,8 @@ class PageOneCar extends StatelessWidget {
               TextButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PageDeleteCar(
-                      plate_number: plate_number,
+                    builder: (context) => PageDeleteUser(
+                      user_id: user_id,
                     ),
                   ),
                 ),
@@ -57,17 +59,17 @@ class PageOneCar extends StatelessWidget {
     return FutureBuilder<Response>(
       // In real apps, use some sort of state management (BLoC is cool)
       // to prevent duplicate requests when the UI rebuilds
-      future: Provider.of<ApiService>(context).carByPlateNumber(plate_number),
+      future: Provider.of<ApiService>(context).userById(int.parse(user_id)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // Snapshot's data is the Response
           // You can see there's no type safety here (only List<dynamic>)
           // print(snapshot.data!.bodyString);
           // if (snapshot.data.bodyString != null)
-          final Car myCar =
-              Car.fromJson(json.decode(snapshot.data!.bodyString));
+          final User myUser =
+              User.fromJson(json.decode(snapshot.data!.bodyString));
           // final List posts = json.decode(snapshot.data!.bodyString);
-          return _buildPosts(context, myCar);
+          return _buildPosts(context, myUser);
         } else {
           // Show a loading indicator while waiting for the posts
           return Center(
@@ -78,9 +80,9 @@ class PageOneCar extends StatelessWidget {
     );
   }
 
-  Widget _buildPosts(BuildContext context, Car myCar) {
-    print(myCar.toString());
-    return myCar.convertToWidgetList();
+  Widget _buildPosts(BuildContext context, User myUser) {
+    print(myUser.toString());
+    return myUser.convertToWidgetList();
   }
 }
 
