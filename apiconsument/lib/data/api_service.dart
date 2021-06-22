@@ -5,7 +5,9 @@ import 'package:chopper/chopper.dart';
 part 'api_service.chopper.dart';
 
 // @ChopperApi(baseUrl: 'https://jsonplaceholder.typicode.com')
-@ChopperApi(baseUrl: 'http://s-vm.northeurope.cloudapp.azure.com:8081')
+
+@ChopperApi(baseUrl: 'http://iap-back-wredter-8081-hq.azurewebsites.net')
+// @ChopperApi(baseUrl: 'http://s-vm.northeurope.cloudapp.azure.com:8081')
 abstract class ApiService extends ChopperService {
   @Get(path: '/user/{id}')
   Future<Response> userById(@Path('id') int id);
