@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+import 'data/office.dart';
 
 class PageListOffices extends StatelessWidget {
   final String listName;
@@ -42,13 +43,47 @@ class PageListOffices extends StatelessWidget {
           // print(snapshot.data!.bodyString);
           // if (snapshot.data.bodyString != null)
           final List posts = json.decode(snapshot.data!.bodyString);
-          return _buildPosts(context, posts);
+          final List<Office> offices = [];
+          for (var item in posts) {
+            offices.add(Office(item['id'], item['city'], item['type']));
+          }
+          // return _buildPosts(context, posts);
+          return _buildOfficeList(context, offices);
         } else {
           // Show a loading indicator while waiting for the posts
           return Center(
             child: CircularProgressIndicator(),
           );
         }
+      },
+    );
+  }
+
+  ListView _buildOfficeList(BuildContext context, List<Office> offices) {
+    return ListView.builder(
+      itemCount: offices.length,
+      padding: EdgeInsets.all(8),
+      itemBuilder: (context, index) {
+        // return Office.obj(offices[index]).toWidgetCard();
+        return Card(
+          elevation: 4,
+          child: ListTile(
+            // leading: Icon(Icons.album),
+            leading: offices[index].type == "HQ"
+                ? Icon(Icons.home_work)
+                : Icon(Icons.home_filled),
+            title: Text(
+              // '[' +
+              offices[index].id.toString() +
+                  '. ' +
+                  // '] ' +
+                  offices[index].city.toString(),
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(offices[index].type),
+            onTap: () => _navigateToPost(context, offices[index].id),
+          ),
+        );
       },
     );
   }

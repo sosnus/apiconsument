@@ -66,22 +66,23 @@ class PageListUsers extends StatelessWidget {
   //     ),
   //   );
   // }
+  // In real apps, use some sort of state management (BLoC is cool)
+  // to prevent duplicate requests when the UI rebuilds
+
+  // Snapshot's data is the Response
+  // You can see there's no type safety here (only List<dynamic>)
+  // print(snapshot.data!.bodyString);
+  // if (snapshot.data.bodyString != null)
+  // Show a loading indicator while waiting for the posts
 
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
-      // In real apps, use some sort of state management (BLoC is cool)
-      // to prevent duplicate requests when the UI rebuilds
       future: Provider.of<ApiService>(context).usersAll(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          // Snapshot's data is the Response
-          // You can see there's no type safety here (only List<dynamic>)
-          // print(snapshot.data!.bodyString);
-          // if (snapshot.data.bodyString != null)
           final List posts = json.decode(snapshot.data!.bodyString);
           return _buildPosts(context, posts);
         } else {
-          // Show a loading indicator while waiting for the posts
           return Center(
             child: CircularProgressIndicator(),
           );
