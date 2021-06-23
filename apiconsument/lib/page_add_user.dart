@@ -18,6 +18,7 @@ enum Gender { M, W }
 
 Gender? _selectedGender = Gender.M;
 int selectedOfficeId = -1;
+String selectedOfficeName = "(please select)";
 String dateAsString = "Change birth date)";
 
 class PageAddUser extends StatefulWidget {
@@ -180,7 +181,11 @@ class _PageAddUserState extends State<PageAddUser> {
                       ],
                     ),
                   ),
-              child: Text("Select office")),
+              child: Text("🏢 Office: " +
+                  selectedOfficeId.toString() +
+                  ' ' +
+                  selectedOfficeName)),
+          // form_officeId_EditingController.text)),
           ElevatedButton(
               //form_officeId_EditingController
               onPressed: () => {
@@ -188,7 +193,7 @@ class _PageAddUserState extends State<PageAddUser> {
                         selectOfficeWindow().toString()
                     // selectedOfficeId = selectOfficeWindow()
                   },
-              child: Text("🏢 Selected office: " +
+              child: Text("Selected office🏢 : " +
                   form_officeId_EditingController.text)),
           // roleSelectNewWindow(),
           TextFormField(
@@ -379,12 +384,10 @@ class _PageAddUserState extends State<PageAddUser> {
 
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
-      future: Provider.of<ApiService>(context).usersAll(),
+      future: Provider.of<ApiService>(context).officeAll(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final List posts = json.decode(snapshot.data!.bodyString);
-          // return Text("S\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSSS");
-          // return ScrollView();
           return Container(
               width: double.infinity,
               height: double.infinity,
@@ -408,14 +411,20 @@ class _PageAddUserState extends State<PageAddUser> {
         return Card(
           elevation: 4,
           child: ListTile(
-            title: Text(
-              posts[index]['surName'],
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(posts[index]['firstName']),
-            onTap: () => Navigator.pop(context, 'Cancel'),
-            // onTap: () => _navigateToOneUserPage(context, posts[index]['id']),
-          ),
+              title: Text(
+                posts[index]['id'].toString(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(posts[index]['city']),
+              onTap: () => {
+                    Navigator.pop(context, 'type'),
+                    setState(() {
+                      selectedOfficeName = posts[index]['city'];
+                      selectedOfficeId = posts[index]['id'];
+                    })
+                  }
+              // onTap: () => _navigateToOneUserPage(context, posts[index]['id']),
+              ),
         );
       },
     );
