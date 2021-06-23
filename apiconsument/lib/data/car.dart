@@ -20,7 +20,7 @@ class Car {
         model = json['model'],
         type = json['type'],
         vinNumber = json['vinNumber'],
-        assigned = json['assigned'];
+        assigned = json['assigned'] == null ? false : json['assigned'];
 
   // Map<String, dynamic> toJson() => {
   //       'firstName': firstName,
