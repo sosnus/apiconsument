@@ -68,15 +68,12 @@ class PageListOffices extends StatelessWidget {
         return Card(
           elevation: 4,
           child: ListTile(
-            // leading: Icon(Icons.album),
             leading: offices[index].type == "HQ"
                 ? Icon(Icons.home_work)
                 : Icon(Icons.home_filled),
             title: Text(
-              // '[' +
               offices[index].id.toString() +
                   '. ' +
-                  // '] ' +
                   offices[index].city.toString(),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -88,25 +85,25 @@ class PageListOffices extends StatelessWidget {
     );
   }
 
-  ListView _buildPosts(BuildContext context, List posts) {
-    return ListView.builder(
-      itemCount: posts.length,
-      padding: EdgeInsets.all(8),
-      itemBuilder: (context, index) {
-        return Card(
-          elevation: 4,
-          child: ListTile(
-            title: Text(
-              posts[index]['city'],
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(posts[index]['type']),
-            onTap: () => _navigateToPost(context, posts[index]['id']),
-          ),
-        );
-      },
-    );
-  }
+  // ListView _buildPosts(BuildContext context, List posts) {
+  //   return ListView.builder(
+  //     itemCount: posts.length,
+  //     padding: EdgeInsets.all(8),
+  //     itemBuilder: (context, index) {
+  //       return Card(
+  //         elevation: 4,
+  //         child: ListTile(
+  //           title: Text(
+  //             posts[index]['city'],
+  //             style: TextStyle(fontWeight: FontWeight.bold),
+  //           ),
+  //           subtitle: Text(posts[index]['type']),
+  //           onTap: () => _navigateToPost(context, posts[index]['id']),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   void _navigateToPost(BuildContext context, int id) {
     Navigator.of(context).push(
