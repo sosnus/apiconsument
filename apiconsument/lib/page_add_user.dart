@@ -18,6 +18,8 @@ enum Gender { M, W }
 
 Gender? _selectedGender = Gender.M;
 int selectedOfficeId = -1;
+int selectedRoleId = -1;
+
 String selectedOfficeName = "(please select)";
 String dateAsString = "Change birth date)";
 
@@ -136,6 +138,7 @@ class _PageAddUserState extends State<PageAddUser> {
 
           roleRadiobuttonGender(),
           // roleDropdownWidget(),
+          roleDropdownWidget(),
           ElevatedButton(
               onPressed: () => showDialog<String>(
                     context: context,
@@ -300,6 +303,11 @@ class _PageAddUserState extends State<PageAddUser> {
       onChanged: (String? newValue) {
         setState(() {
           dropdownValue = newValue!;
+          if (RolesCollection.getRole(0).asString() == dropdownValue) {
+            selectedRoleId = RolesCollection.getRole(0).id;
+          } else {
+            selectedRoleId = RolesCollection.getRole(1).id;
+          }
         });
       },
       items: <String>[
@@ -340,7 +348,8 @@ class _PageAddUserState extends State<PageAddUser> {
         // dateAsString,
         form_birthDate_EditingController.text,
         // form_birthDate_EditingController.text,
-        1,
+        // 1,
+        selectedRoleId,
         // 1,
         selectedOfficeId
         // int.parse(form_roleId_EditingController.text),
@@ -354,6 +363,7 @@ class _PageAddUserState extends State<PageAddUser> {
       ),
     );
     // Provider.of<ApiService>(context).postNewUser(myUser.toJson());
+    print("@@@@@selectedRoleId " + selectedRoleId.toString());
   }
 
   Future<DateTime?> selectDatetime() async {
@@ -368,13 +378,13 @@ class _PageAddUserState extends State<PageAddUser> {
         locale: LocaleType.en);
   }
 
-  int selectOfficeWindow() {
-    _showMyDialog();
-    setState(() {
-      selectedOfficeId++;
-    });
-    return selectedOfficeId;
-  }
+  // int selectOfficeWindow() {
+  //   _showMyDialog();
+  //   setState(() {
+  //     selectedOfficeId++;
+  //   });
+  //   return selectedOfficeId;
+  // }
 
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
@@ -424,67 +434,67 @@ class _PageAddUserState extends State<PageAddUser> {
     );
   }
 
-  Future<void> _showMyDialog() async {
-    final Future<Widget> _calculation = Future<Widget>.delayed(
-      const Duration(seconds: 2),
-      () => Text('Data Loaded'),
-    );
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          // future:
-          // future: Provider.of<ApiService>(context).userById(int.parse(user_id)),
-          title: const Text('AlertDialog Title'),
-          content: FutureBuilder<Widget>(
-            future: _calculation,
-            builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-              List<Widget> children;
-              if (snapshot.hasData) {
-                children = <Widget>[
-                  const Icon(
-                    Icons.check_circle_outline,
-                    color: Colors.green,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Text('Result: ${snapshot.data}'),
-                  )
-                ];
-              } else if (snapshot.hasError) {
-                children = <Widget>[
-                  const Icon(
-                    Icons.error_outline,
-                    color: Colors.red,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Text('Error: ${snapshot.error}'),
-                  )
-                ];
-              } else {
-                children = const <Widget>[
-                  SizedBox(
-                    child: CircularProgressIndicator(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Awaiting result...'),
-                  )
-                ];
-              }
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: children,
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
+  // // Future<void> _showMyDialog() async {
+  //   final Future<Widget> _calculation = Future<Widget>.delayed(
+  //     const Duration(seconds: 2),
+  //     () => Text('Data Loaded'),
+  //   );
+  //   return showDialog<void>(
+  //     context: context,
+  //     barrierDismissible: false, // user must tap button!
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         // future:
+  //         // future: Provider.of<ApiService>(context).userById(int.parse(user_id)),
+  //         title: const Text('AlertDialog Title'),
+  //         content: FutureBuilder<Widget>(
+  //           future: _calculation,
+  //           builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+  //             List<Widget> children;
+  //             if (snapshot.hasData) {
+  //               children = <Widget>[
+  //                 const Icon(
+  //                   Icons.check_circle_outline,
+  //                   color: Colors.green,
+  //                 ),
+  //                 Padding(
+  //                   padding: const EdgeInsets.only(top: 16),
+  //                   child: Text('Result: ${snapshot.data}'),
+  //                 )
+  //               ];
+  //             } else if (snapshot.hasError) {
+  //               children = <Widget>[
+  //                 const Icon(
+  //                   Icons.error_outline,
+  //                   color: Colors.red,
+  //                 ),
+  //                 Padding(
+  //                   padding: const EdgeInsets.only(top: 16),
+  //                   child: Text('Error: ${snapshot.error}'),
+  //                 )
+  //               ];
+  //             } else {
+  //               children = const <Widget>[
+  //                 SizedBox(
+  //                   child: CircularProgressIndicator(),
+  //                 ),
+  //                 Padding(
+  //                   padding: EdgeInsets.only(top: 16),
+  //                   child: Text('Awaiting result...'),
+  //                 )
+  //               ];
+  //             }
+  //             return Center(
+  //               child: Column(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 crossAxisAlignment: CrossAxisAlignment.center,
+  //                 children: children,
+  //               ),
+  //             );
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }
