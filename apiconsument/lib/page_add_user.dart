@@ -133,22 +133,8 @@ class _PageAddUserState extends State<PageAddUser> {
               return null;
             },
           ),
-          // TextFormField(
-          //   controller: form_gender_EditingController,
-          //   decoration: const InputDecoration(
-          //     labelText: 'Gender (gender) (char)',
-          //   ),
-          //   validator: (value) {
-          //     if (value == null || value.isEmpty) {
-          //       return 'Please enter some text';
-          //     }
-          //     return null;
-          //   },
-          // ),
-          Text("todo:"),
-          Text("Radiobutton Role"),
-          Text("Radiobutton Office:"),
-          // roleRadiobuttonGender(),
+
+          roleRadiobuttonGender(),
           // roleDropdownWidget(),
           ElevatedButton(
               onPressed: () => showDialog<String>(
@@ -186,15 +172,15 @@ class _PageAddUserState extends State<PageAddUser> {
                   ' ' +
                   selectedOfficeName)),
           // form_officeId_EditingController.text)),
-          ElevatedButton(
-              //form_officeId_EditingController
-              onPressed: () => {
-                    form_officeId_EditingController.text =
-                        selectOfficeWindow().toString()
-                    // selectedOfficeId = selectOfficeWindow()
-                  },
-              child: Text("Selected office🏢 : " +
-                  form_officeId_EditingController.text)),
+          // ElevatedButton(
+          //     //form_officeId_EditingController
+          //     onPressed: () => {
+          //           form_officeId_EditingController.text =
+          //               selectOfficeWindow().toString()
+          //           // selectedOfficeId = selectOfficeWindow()
+          //         },
+          //     child: Text("Selected office🏢 : " +
+          //         form_officeId_EditingController.text)),
           // roleSelectNewWindow(),
           TextFormField(
             controller: form_pesel_EditingController,
@@ -242,9 +228,14 @@ class _PageAddUserState extends State<PageAddUser> {
   String dropdownValue = RolesCollection.getRole(0).asString();
 
   Widget roleRadiobuttonGender() => Column(
+        //  Container(
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        // child: new ListView(
+        // scrollDirection: Axis.horizontal,
         children: <Widget>[
           ListTile(
-            title: const Text('Man'),
+            title: const Text('M'),
             leading: Radio<Gender>(
               value: Gender.M,
               groupValue: _selectedGender,
@@ -256,7 +247,7 @@ class _PageAddUserState extends State<PageAddUser> {
             ),
           ),
           ListTile(
-            title: const Text('Woman'),
+            title: const Text('W'),
             leading: Radio<Gender>(
               value: Gender.W,
               groupValue: _selectedGender,
@@ -268,6 +259,7 @@ class _PageAddUserState extends State<PageAddUser> {
             ),
           ),
         ],
+        // ),
       );
 
   Widget roleRadiobuttonRole() => Column(
@@ -338,20 +330,22 @@ class _PageAddUserState extends State<PageAddUser> {
     }
 
     User myUser = new User(
-      int.parse(form_temporaryId_toDelete_this_field_EditingController.text),
-      form_first_name_EditingController.text,
-      form_middle_name_EditingController.text,
-      form_surname_name_EditingController.text,
-      form_pesel_EditingController.text,
-      // form_gender_EditingController.text,
-      extractFromEnum(_selectedGender!),
-      dateAsString,
-      // form_birthDate_EditingController.text,
-      1,
-      1,
-      // int.parse(form_roleId_EditingController.text),
-      // int.parse(form_officeId_EditingController.text),
-    );
+        int.parse(form_temporaryId_toDelete_this_field_EditingController.text),
+        form_first_name_EditingController.text,
+        form_middle_name_EditingController.text,
+        form_surname_name_EditingController.text,
+        form_pesel_EditingController.text,
+        // form_gender_EditingController.text,
+        extractFromEnum(_selectedGender!),
+        // dateAsString,
+        form_birthDate_EditingController.text,
+        // form_birthDate_EditingController.text,
+        1,
+        // 1,
+        selectedOfficeId
+        // int.parse(form_roleId_EditingController.text),
+        // int.parse(form_officeId_EditingController.text),
+        );
     print(myUser.toString());
 
     Navigator.of(context).push(
