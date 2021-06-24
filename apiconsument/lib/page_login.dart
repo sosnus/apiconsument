@@ -1,13 +1,8 @@
-import 'dart:convert';
 import 'package:apiconsument/page_home.dart';
-import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'data/servers.dart';
 import 'material_app_home.dart';
-import 'page_delete_car.dart';
 // import 'data/api_service.dart';
-import 'data/car.dart';
 
 class PageLogin extends StatelessWidget {
   final Server choosenServer;

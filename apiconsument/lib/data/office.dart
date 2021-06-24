@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/scroll_view.dart';
-
 class Office {
   final int id; // key
   final String city;

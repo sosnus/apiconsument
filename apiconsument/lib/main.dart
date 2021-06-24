@@ -1,17 +1,9 @@
-import 'package:apiconsument/page_home.dart';
+import 'data/servers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
-
-import 'data/api_service.dart';
-// import 'home_page.dart';
-
 import 'package:logging/logging.dart';
-
-import 'data/servers.dart';
-import 'material_app_home.dart';
 import 'page_login.dart';
+// import 'home_page.dart';
 
 void main() {
   _setupLogging();
