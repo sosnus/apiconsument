@@ -1,36 +1,48 @@
 import 'dart:convert';
-import 'data/api_service.dart';
-import 'package:apiconsument/a_single_post_page.dart';
-import 'package:chopper/chopper.dart';
+
 import 'package:flutter/material.dart';
+import 'package:chopper/chopper.dart';
 import 'package:provider/provider.dart';
 
-class PageList extends StatelessWidget {
-  final String listName;
+import 'data/api_service.dart';
+import 'a_single_post_page.dart';
 
-  const PageList({
-    Key? key,
-    required this.listName,
-  }) : super(key: key);
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List: ' + listName),
+        title: Text('Chopper Blog'),
       ),
-      body: _buildList(context),
+      body: _buildBody(context),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () async {
+          final response =
+              await Provider.of<ApiService>(context).postPost({'key': 'value'});
+          print(response.body);
+        },
+      ),
     );
   }
 
-  FutureBuilder<Response> _buildList(BuildContext context) {
+  FutureBuilder<Response> _buildBody(BuildContext context) {
+    // FutureBuilder is perfect for easily building UI when awaiting a Future
+    // Response is the type currently returned by all the methods of PostApiService
     return FutureBuilder<Response>(
+      // In real apps, use some sort of state management (BLoC is cool)
+      // to prevent duplicate requests when the UI rebuilds
       future: Provider.of<ApiService>(context).getPosts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          // Snapshot's data is the Response
+          // You can see there's no type safety here (only List<dynamic>)
+          // print(snapshot.data!.bodyString);
+          // if (snapshot.data.bodyString != null)
           final List posts = json.decode(snapshot.data!.bodyString);
           return _buildPosts(context, posts);
         } else {
+          // Show a loading indicator while waiting for the posts
           return Center(
             child: CircularProgressIndicator(),
           );
