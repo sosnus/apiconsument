@@ -1,7 +1,7 @@
 import 'package:apiconsument/data/role.dart';
 
 class RolesCollection {
-  RolesCollection() {}
+  RolesCollection();
   static List rolesCollection = [
     Role(1, "BOmanager", "BOmanager", "BOmanager"),
     Role(2, "HQmanager", "HQmanager", "HQmanager")

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:apiconsument/page_delete_user.dart';
 import 'package:chopper/chopper.dart';
 import 'package:intl/intl.dart';
 import 'package:apiconsument/data/roles_collection.dart';
@@ -60,30 +59,27 @@ class _PageAddUserState extends State<PageAddUser> {
   final _formKey = GlobalKey<FormState>();
   List roleList = [];
 
-  TextEditingController form_temporaryId_toDelete_this_field_EditingController =
+  TextEditingController formTemporartUserIdEditingController =
       TextEditingController(); // form_id_EditingController
 
-  TextEditingController form_first_name_EditingController =
+  TextEditingController formFirstNameEditingController =
       TextEditingController();
 
-  TextEditingController form_middle_name_EditingController =
+  TextEditingController formMiddleNameEditingController =
       TextEditingController();
 
-  TextEditingController form_surname_name_EditingController =
-      TextEditingController();
+  TextEditingController formSurnameEditingController = TextEditingController();
 
-  TextEditingController form_gender_EditingController = TextEditingController();
+  TextEditingController formGenderEditingController = TextEditingController();
 
-  TextEditingController form_pesel_EditingController =
+  TextEditingController formPeselEditingController =
       TextEditingController(text: "11111111111");
 
-  TextEditingController form_birthDate_EditingController =
-      TextEditingController();
+  TextEditingController formBirtDateEditingController = TextEditingController();
 
-  TextEditingController form_roleId_EditingController = TextEditingController();
+  TextEditingController formRoleIdEditingController = TextEditingController();
 
-  TextEditingController form_officeId_EditingController =
-      TextEditingController();
+  TextEditingController formOfficeIdEditingController = TextEditingController();
 
   _formAddNewUser(BuildContext context) {
     // roleL
@@ -93,7 +89,7 @@ class _PageAddUserState extends State<PageAddUser> {
         padding: EdgeInsets.all(8.0),
         children: <Widget>[
           TextFormField(
-            controller: form_temporaryId_toDelete_this_field_EditingController,
+            controller: formTemporartUserIdEditingController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               labelText: 'Id (id)',
@@ -110,7 +106,7 @@ class _PageAddUserState extends State<PageAddUser> {
             },
           ),
           TextFormField(
-            controller: form_first_name_EditingController,
+            controller: formFirstNameEditingController,
             decoration: const InputDecoration(
               labelText: 'First Name (first_name)',
             ),
@@ -122,7 +118,7 @@ class _PageAddUserState extends State<PageAddUser> {
             },
           ),
           TextFormField(
-            controller: form_middle_name_EditingController,
+            controller: formMiddleNameEditingController,
             decoration: const InputDecoration(
               labelText: 'Middle Name (middle_name)',
             ),
@@ -134,7 +130,7 @@ class _PageAddUserState extends State<PageAddUser> {
             },
           ),
           TextFormField(
-            controller: form_surname_name_EditingController,
+            controller: formSurnameEditingController,
             decoration: const InputDecoration(
               labelText: 'Surname (surname)',
             ),
@@ -196,7 +192,7 @@ class _PageAddUserState extends State<PageAddUser> {
           //         form_officeId_EditingController.text)),
           // roleSelectNewWindow(),
           TextFormField(
-            controller: form_pesel_EditingController,
+            controller: formPeselEditingController,
             decoration: const InputDecoration(
               labelText: 'Pesel (pesel) (10 to 12 numbers)',
             ),
@@ -211,7 +207,7 @@ class _PageAddUserState extends State<PageAddUser> {
               onPressed: () {
                 setState(() {
                   selectDatetime()
-                      .then((value) => form_birthDate_EditingController.text =
+                      .then((value) => formBirtDateEditingController.text =
                           // dateAsString =
                           DateFormat('yyyy-MM-dd').format(value!));
                   // dateAsString;
@@ -219,7 +215,7 @@ class _PageAddUserState extends State<PageAddUser> {
               },
               child: Text(
                 //form_birthDate_EditingController.text
-                "📅    " + form_birthDate_EditingController.text,
+                "📅    " + formBirtDateEditingController.text,
               )),
           // TextFormField(
           //   controller: form_birthDate_EditingController,
@@ -348,15 +344,15 @@ class _PageAddUserState extends State<PageAddUser> {
     }
 
     User myUser = new User(
-        int.parse(form_temporaryId_toDelete_this_field_EditingController.text),
-        form_first_name_EditingController.text,
-        form_middle_name_EditingController.text,
-        form_surname_name_EditingController.text,
-        form_pesel_EditingController.text,
+        int.parse(formTemporartUserIdEditingController.text),
+        formFirstNameEditingController.text,
+        formMiddleNameEditingController.text,
+        formSurnameEditingController.text,
+        formPeselEditingController.text,
         // form_gender_EditingController.text,
         extractFromEnum(_selectedGender!),
         // dateAsString,
-        form_birthDate_EditingController.text,
+        formBirtDateEditingController.text,
         // form_birthDate_EditingController.text,
         // 1,
         selectedRoleId,
