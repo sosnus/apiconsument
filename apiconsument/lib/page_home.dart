@@ -1,8 +1,12 @@
 import 'package:apiconsument/page_list_requestspendings.dart';
+// import 'package:flutter_restart/flutter_restart.dart';
 import 'package:provider/provider.dart';
+import 'package:restart_app/restart_app.dart';
 
 import 'data/api_service.dart';
 import 'data/servers.dart';
+import 'main.dart';
+import 'material_app_home.dart';
 import 'page_list.dart';
 import 'page_list_cars.dart';
 import 'page_list_offices.dart';
@@ -48,7 +52,8 @@ class PageMenu extends StatelessWidget {
     "Users",
     "Offices",
     "Cars",
-    "RequestsPendings"
+    "RequestsPendings",
+    "Logout"
   ];
 
   // const
@@ -172,6 +177,17 @@ class PageMenu extends StatelessWidget {
           ),
         ),
       );
+    else if (selectedItem == "Logout")
+      Restart.restartApp();
+    // _restartApp(); // Cars
+
+// }
+    // runApp(MaterialAppHome(choosenServer));
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => PageSelectServer(),
+    //   ),
+    // );
     else
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -183,6 +199,10 @@ class PageMenu extends StatelessWidget {
         ),
       );
   }
+
+  // void _restartApp() async {
+  //   FlutterRestart.restartApp();
+  // }
 }
 
 // class PageRequests extends StatelessWidget {
