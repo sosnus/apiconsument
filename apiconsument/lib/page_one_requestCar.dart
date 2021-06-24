@@ -3,14 +3,18 @@ import 'package:apiconsument/data/requestCar.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'data/servers.dart';
 import 'page_delete_car.dart';
 import 'data/api_service.dart';
 import 'data/car.dart';
 
 class PageOneRequesCar extends StatelessWidget {
   final int requestId;
+  final Server choosenServer;
 
-  const PageOneRequesCar({Key? key, required this.requestId}) : super(key: key);
+  const PageOneRequesCar(
+      {Key? key, required this.requestId, required this.choosenServer})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +56,7 @@ class PageOneRequesCar extends StatelessWidget {
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => PageDeleteCar(
+                      choosenServer: choosenServer,
                       plate_number: requestId.toString(),
                     ),
                   ),

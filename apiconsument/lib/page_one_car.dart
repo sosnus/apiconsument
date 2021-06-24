@@ -2,14 +2,18 @@ import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'data/servers.dart';
 import 'page_delete_car.dart';
 import 'data/api_service.dart';
 import 'data/car.dart';
 
 class PageOneCar extends StatelessWidget {
+  final Server choosenServer;
   final String plate_number;
 
-  const PageOneCar({Key? key, required this.plate_number}) : super(key: key);
+  const PageOneCar(
+      {Key? key, required this.plate_number, required this.choosenServer})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,7 @@ class PageOneCar extends StatelessWidget {
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => PageDeleteCar(
+                      choosenServer: choosenServer,
                       plate_number: plate_number,
                     ),
                   ),

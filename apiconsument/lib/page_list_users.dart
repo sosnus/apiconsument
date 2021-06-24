@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'data/servers.dart';
 import 'page_add_user.dart';
 import 'page_one_user.dart';
 import 'package:chopper/chopper.dart';
@@ -10,10 +11,12 @@ import 'data/api_service.dart';
 
 class PageListUsers extends StatelessWidget {
   final String listName;
+  final Server choosenServer;
 
   const PageListUsers({
     Key? key,
     required this.listName,
+    required this.choosenServer,
   }) : super(key: key);
 
   @override
@@ -115,6 +118,7 @@ class PageListUsers extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PageOneUser(
+          choosenServer: choosenServer,
           user_id: id.toString(),
         ),
       ),
@@ -124,7 +128,9 @@ class PageListUsers extends StatelessWidget {
   _navigateToUserAddPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageAddUser(),
+        builder: (context) => PageAddUser(
+          choosenServer: choosenServer,
+        ),
         // builder: (context) => PageRequests(selectedItem),
         // builder: (context) => SinglePostPage(postId: int(id)),
       ),

@@ -4,13 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'data/api_service.dart';
 import 'data/office.dart';
+import 'data/servers.dart';
 import 'data/user.dart';
 import 'page_delete_user.dart';
 
 class PageOneUser extends StatelessWidget {
   final String user_id;
 
-  const PageOneUser({Key? key, required this.user_id}) : super(key: key);
+  final Server choosenServer;
+
+  const PageOneUser(
+      {Key? key, required this.choosenServer, required this.user_id})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +43,7 @@ class PageOneUser extends StatelessWidget {
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => PageDeleteUser(
+                      choosenServer: choosenServer,
                       user_id: user_id,
                     ),
                   ),

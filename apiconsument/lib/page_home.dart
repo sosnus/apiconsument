@@ -1,5 +1,8 @@
 import 'package:apiconsument/page_list_requestspendings.dart';
+import 'package:provider/provider.dart';
 
+import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'page_list.dart';
 import 'page_list_cars.dart';
 import 'page_list_offices.dart';
@@ -7,7 +10,39 @@ import 'page_list_requests.dart';
 import 'page_list_users.dart';
 import 'package:flutter/material.dart';
 
-class PageHome extends StatelessWidget {
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Provider(
+//       // The initialized PostApiService is now available down the widget tree
+//       create: (_) => ApiService.create(),
+//       // builder: (_) => ApiService.create(),
+//       // Always call dispose on the ChopperClient to release resources
+//       dispose: (context, ApiService service) => service.client.dispose(),
+//       child: MaterialApp(
+//         // theme: ThemeData.from(
+//         //   // colorScheme: choosenServer,
+//         //   colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
+//         //   // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
+//         // ),
+//         title: 'Material App',
+//         // home: PageHome(),
+//         home: PageMenu(server: server,
+//             //   onThemeChanged: (data) {
+//             //   setState(() {
+//             //     brightness = data.brightness;
+//             //   });
+//             // },
+//             ),
+//         // home: HomePage(),
+//       ),
+//     );
+//   }
+// }
+
+class PageMenu extends StatelessWidget {
+  final Server choosenServer;
+
   final List<String> menu = <String>[
     "Requests",
     "Users",
@@ -16,11 +51,18 @@ class PageHome extends StatelessWidget {
     "RequestsPendings"
   ];
 
+  // const
+  PageMenu({Key? key, required this.choosenServer}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: choosenServer.colorSchemeBackground,
+      // theme: ThemeData.from(
+      //     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green),
+      //   ),
       appBar: AppBar(
-        title: Text('Api client'),
+        title: Text(choosenServer.type + ' ' + choosenServer.city),
       ),
       // body: _buildBody(context),
       body: _buildPosts(context, menu),
@@ -86,6 +128,7 @@ class PageHome extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PageListRequestsCars(
+            choosenServer: choosenServer,
             listName: menu[0],
           ),
           // builder: (context) => SinglePostPage(postId: int(id)),
@@ -96,6 +139,7 @@ class PageHome extends StatelessWidget {
         MaterialPageRoute(
           builder: (context) => PageListUsers(
             listName: selectedItem,
+            choosenServer: choosenServer,
           ),
           // builder: (context) => SinglePostPage(postId: int(id)),
         ),
@@ -113,6 +157,7 @@ class PageHome extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PageListRequestsPendingsCars(
+            choosenServer: choosenServer,
             listName: selectedItem,
           ),
           // builder: (context) => SinglePostPage(postId: int(id)),
@@ -122,6 +167,7 @@ class PageHome extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PageListCars(
+            choosenServer: choosenServer,
             listName: selectedItem,
           ),
         ),
@@ -130,6 +176,7 @@ class PageHome extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PageListRequestsCars(
+            choosenServer: choosenServer,
             listName: 'requests',
           ),
           // builder: (context) => SinglePostPage(postId: int(id)),

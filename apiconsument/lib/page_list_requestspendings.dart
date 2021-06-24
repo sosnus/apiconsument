@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:apiconsument/data/servers.dart';
 import 'package:apiconsument/page_add_offices.dart';
 import 'package:apiconsument/page_one_requestCar.dart';
 import 'package:apiconsument/single_post_page.dart';
@@ -13,10 +14,12 @@ import 'data/requestCar.dart';
 
 class PageListRequestsPendingsCars extends StatelessWidget {
   final String listName;
+  final Server choosenServer;
 
   const PageListRequestsPendingsCars({
     Key? key,
     required this.listName,
+    required this.choosenServer,
   }) : super(key: key);
 
   @override
@@ -128,7 +131,8 @@ class PageListRequestsPendingsCars extends StatelessWidget {
   _navigateToRequestDetails(BuildContext context, int requestId) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageOneRequesCar(requestId: requestId), // TODO:
+        builder: (context) => PageOneRequesCar(
+            choosenServer: choosenServer, requestId: requestId), // TODO:
       ),
     );
   }

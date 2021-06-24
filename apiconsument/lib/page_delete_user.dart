@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'page_home.dart';
 import 'page_list_users.dart';
 import 'page_add_offices.dart';
 
 class PageDeleteUser extends StatelessWidget {
   final String user_id;
+  final Server choosenServer;
+  // MaterialAppHome(this.choosenServer);
 
-  const PageDeleteUser({Key? key, required this.user_id}) : super(key: key);
+  const PageDeleteUser(
+      {Key? key, required this.choosenServer, required this.user_id})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +55,7 @@ class PageDeleteUser extends StatelessWidget {
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PageListUsers(
+                choosenServer: choosenServer,
                 listName: 'Users',
               ),
             ),
@@ -60,7 +66,9 @@ class PageDeleteUser extends StatelessWidget {
         ElevatedButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => PageHome(),
+              builder: (context) => PageMenu(
+                choosenServer: choosenServer,
+              ),
             ),
           ),
           child: Text("Go to main menu"),

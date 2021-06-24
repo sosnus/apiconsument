@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'data/user.dart';
 import 'page_home.dart';
 import 'page_list_users.dart';
@@ -10,8 +11,11 @@ import 'page_add_offices.dart';
 
 class PageAfterAddUser extends StatelessWidget {
   final User user;
+  final Server choosenServer;
 
-  const PageAfterAddUser({Key? key, required this.user}) : super(key: key);
+  const PageAfterAddUser(
+      {Key? key, required this.user, required this.choosenServer})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +57,7 @@ class PageAfterAddUser extends StatelessWidget {
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PageListUsers(
+                choosenServer: choosenServer,
                 listName: 'Users',
               ),
             ),
@@ -62,7 +67,10 @@ class PageAfterAddUser extends StatelessWidget {
         ElevatedButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => PageHome(),
+              builder: (context) => PageMenu(
+                choosenServer: choosenServer,
+                // server: Servers.serversList.first,
+              ),
             ),
           ),
           child: Text("Go to main menu"),

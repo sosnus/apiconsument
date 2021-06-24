@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'data/user.dart';
 
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -24,15 +25,24 @@ String selectedOfficeName = "(please select)";
 String dateAsString = "Change birth date)";
 
 class PageAddUser extends StatefulWidget {
+  final Server choosenServer;
+
   PageAddUser({
     Key? key,
+    required this.choosenServer,
   }) : super(key: key);
 
   @override
-  _PageAddUserState createState() => _PageAddUserState();
+  _PageAddUserState createState() => _PageAddUserState(choosenServer);
 }
 
 class _PageAddUserState extends State<PageAddUser> {
+  final Server choosenServer;
+
+  _PageAddUserState(this.choosenServer);
+
+// ????
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -359,7 +369,8 @@ class _PageAddUserState extends State<PageAddUser> {
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageAfterAddUser(user: myUser),
+        builder: (context) =>
+            PageAfterAddUser(choosenServer: choosenServer, user: myUser),
       ),
     );
     // Provider.of<ApiService>(context).postNewUser(myUser.toJson());

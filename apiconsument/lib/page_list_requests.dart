@@ -10,13 +10,16 @@ import 'package:provider/provider.dart';
 import 'data/api_service.dart';
 import 'data/office.dart';
 import 'data/requestCar.dart';
+import 'data/servers.dart';
 
 class PageListRequestsCars extends StatelessWidget {
   final String listName;
+  final Server choosenServer;
 
   const PageListRequestsCars({
     Key? key,
     required this.listName,
+    required this.choosenServer,
   }) : super(key: key);
 
   @override
@@ -128,7 +131,8 @@ class PageListRequestsCars extends StatelessWidget {
   _navigateToRequestDetails(BuildContext context, int requestId) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageOneRequesCar(requestId: requestId), // TODO:
+        builder: (context) => PageOneRequesCar(
+            choosenServer: choosenServer, requestId: requestId), // TODO:
       ),
     );
   }

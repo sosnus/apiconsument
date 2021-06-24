@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'page_home.dart';
 import 'page_list_cars.dart';
 
 class PageDeleteCar extends StatelessWidget {
   final String plate_number;
+  final Server choosenServer;
 
-  const PageDeleteCar({Key? key, required this.plate_number}) : super(key: key);
+  const PageDeleteCar(
+      {Key? key, required this.plate_number, required this.choosenServer})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,7 @@ class PageDeleteCar extends StatelessWidget {
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PageListCars(
+                choosenServer: choosenServer,
                 listName: 'Cars',
               ),
             ),
@@ -61,7 +66,9 @@ class PageDeleteCar extends StatelessWidget {
         ElevatedButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => PageHome(),
+              builder: (context) => PageMenu(
+                choosenServer: choosenServer,
+              ),
             ),
           ),
           child: Text("Go to main menu"),

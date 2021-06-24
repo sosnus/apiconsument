@@ -7,15 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'page_one_car.dart';
 import 'page_add_offices.dart';
 
 class PageListCars extends StatelessWidget {
   final String listName;
+  final Server choosenServer;
 
   const PageListCars({
     Key? key,
     required this.listName,
+    required this.choosenServer,
   }) : super(key: key);
 
   @override
@@ -82,7 +85,10 @@ class PageListCars extends StatelessWidget {
   void _navigateToPost(BuildContext context, String id) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageOneCar(plate_number: id),
+        builder: (context) => PageOneCar(
+          plate_number: id,
+          choosenServer: choosenServer,
+        ),
       ),
     );
   }
