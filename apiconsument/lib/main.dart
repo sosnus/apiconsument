@@ -11,6 +11,7 @@ import 'package:logging/logging.dart';
 
 import 'data/servers.dart';
 import 'material_app_home.dart';
+import 'page_login.dart';
 
 void main() {
   _setupLogging();
@@ -136,20 +137,37 @@ class _MyPageSelectServerState extends State<PageSelectServer> {
         ElevatedButton(
             // MaterialApp(
             onPressed: () {
-              runApp(MaterialAppHome(choosenServer));
-              // Navigator.push(
-              //   context,
-              //   // MaterialPageRoute(
-              //   //     builder: (context) => PageHome(
-              //   //           server: choosenServer,
-              //   //         )),
-              //   MaterialPageRoute(
-              //       builder: (context) => MaterialAppHome(
-              //             server: choosenServer,
-              //           )),
-              // );
+              // runApp(MaterialAppHome(choosenServer));
+              Navigator.push(
+                context,
+                // MaterialPageRoute(
+                //     builder: (context) => PageHome(
+                //           server: choosenServer,
+                //         )),
+                MaterialPageRoute(
+                    builder: (context) => PageLogin(
+                          choosenServer: choosenServer,
+                        )),
+              );
             },
-            child: Text("Login"))
+            child: Text("Choose")),
+        // ElevatedButton(
+        //     // MaterialApp(
+        //     onPressed: () {
+        //       runApp(MaterialAppHome(choosenServer));
+        //       // Navigator.push(
+        //       //   context,
+        //       //   // MaterialPageRoute(
+        //       //   //     builder: (context) => PageHome(
+        //       //   //           server: choosenServer,
+        //       //   //         )),
+        //       //   MaterialPageRoute(
+        //       //       builder: (context) => MaterialAppHome(
+        //       //             server: choosenServer,
+        //       //           )),
+        //       // );
+        //     },
+        //     child: Text("Do not push it"))
       ],
     );
   }
