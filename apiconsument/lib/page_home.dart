@@ -1,3 +1,5 @@
+import 'package:apiconsument/page_list_requestspendings.dart';
+
 import 'page_list.dart';
 import 'page_list_cars.dart';
 import 'page_list_offices.dart';
@@ -6,7 +8,13 @@ import 'page_list_users.dart';
 import 'package:flutter/material.dart';
 
 class PageHome extends StatelessWidget {
-  final List<String> menu = <String>["Requests", "Users", "Offices", "Cars"];
+  final List<String> menu = <String>[
+    "Requests",
+    "Users",
+    "Offices",
+    "Cars",
+    "RequestsPendings"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +86,7 @@ class PageHome extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PageListRequestsCars(
-            listName: 'requests',
+            listName: menu[0],
           ),
           // builder: (context) => SinglePostPage(postId: int(id)),
         ),
@@ -96,6 +104,15 @@ class PageHome extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PageListOffices(
+            listName: selectedItem,
+          ),
+          // builder: (context) => SinglePostPage(postId: int(id)),
+        ),
+      );
+    else if (selectedItem == "RequestsPendings") // Offices
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PageListRequestsPendingsCars(
             listName: selectedItem,
           ),
           // builder: (context) => SinglePostPage(postId: int(id)),
