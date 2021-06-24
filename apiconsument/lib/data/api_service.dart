@@ -33,15 +33,15 @@ abstract class ApiService extends ChopperService {
   @Get(path: '/request/{id}')
   Future<Response> requestById(@Path('id') int id);
 
-  @Get(path: '/car/{plate_number}')
-  Future<Response> carByPlateNumber(@Path('plate_number') String plate_number);
+  @Get(path: '/car/{plateNumber}')
+  Future<Response> carByPlateNumber(@Path('plateNumber') String plateNumber);
 
-  @Delete(path: '/_car/{plate_number}')
+  @Delete(path: '/_car/{plateNumber}')
   Future<Response> deleteCarByPlateNumber(
-      @Path('plate_number') String plate_number);
+      @Path('plate_number') String plateNumber);
 
-  @Delete(path: '/_user/{user_id}')
-  Future<Response> deleteUserById(@Path('user_id') String user_id);
+  @Delete(path: '/_user/{userId}')
+  Future<Response> deleteUserById(@Path('userId') String userId);
 
   @Post(path: '/user')
   Future<Response> postNewUser(@Body() Map<String, dynamic> myUser);

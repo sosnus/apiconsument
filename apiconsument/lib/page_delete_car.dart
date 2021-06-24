@@ -9,18 +9,18 @@ import 'page_home.dart';
 import 'page_list_cars.dart';
 
 class PageDeleteCar extends StatelessWidget {
-  final String plate_number;
+  final String plateNumber;
   final Server choosenServer;
 
   const PageDeleteCar(
-      {Key? key, required this.plate_number, required this.choosenServer})
+      {Key? key, required this.plateNumber, required this.choosenServer})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Car removed: ' + plate_number),
+        title: Text('Car removed: ' + plateNumber),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -33,7 +33,7 @@ class PageDeleteCar extends StatelessWidget {
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
       future:
-          Provider.of<ApiService>(context).deleteCarByPlateNumber(plate_number),
+          Provider.of<ApiService>(context).deleteCarByPlateNumber(plateNumber),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final String myRespond = snapshot.data!.bodyString;

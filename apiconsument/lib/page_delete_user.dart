@@ -9,19 +9,19 @@ import 'page_list_users.dart';
 import 'page_add_offices.dart';
 
 class PageDeleteUser extends StatelessWidget {
-  final String user_id;
+  final String userId;
   final Server choosenServer;
   // MaterialAppHome(this.choosenServer);
 
   const PageDeleteUser(
-      {Key? key, required this.choosenServer, required this.user_id})
+      {Key? key, required this.choosenServer, required this.userId})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User removed: ' + user_id),
+        title: Text('User removed: ' + userId),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -33,7 +33,7 @@ class PageDeleteUser extends StatelessWidget {
 
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
-      future: Provider.of<ApiService>(context).deleteUserById(user_id),
+      future: Provider.of<ApiService>(context).deleteUserById(userId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final String myRespond = snapshot.data!.bodyString;

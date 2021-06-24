@@ -86,7 +86,7 @@ class PageListCars extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PageOneCar(
-          plate_number: id,
+          plateNumber: id,
           choosenServer: choosenServer,
         ),
       ),

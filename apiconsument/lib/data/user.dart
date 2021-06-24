@@ -1,4 +1,3 @@
-import 'package:apiconsument/data/role.dart';
 import 'package:flutter/material.dart';
 
 class User {
@@ -33,7 +32,7 @@ class User {
       : id = json['id'],
         firstName = json['firstName'],
         middleName = json['middleName'],
-        surName = json['surName'], //TODO: remove capital N
+        surName = json['surName'], //TO DO: remove capital N
         pesel = json['pesel'],
         gender = json['gender'],
         birthDate = json['birthDate'],

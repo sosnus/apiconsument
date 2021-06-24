@@ -119,7 +119,7 @@ class PageListUsers extends StatelessWidget {
       MaterialPageRoute(
         builder: (context) => PageOneUser(
           choosenServer: choosenServer,
-          user_id: id.toString(),
+          userId: id.toString(),
         ),
       ),
     );

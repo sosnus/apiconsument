@@ -116,7 +116,7 @@ class PageListOffices extends StatelessWidget {
   void _navigateToAddOffice(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageAddOffices(), // TODO:
+        builder: (context) => PageAddOffices(),
       ),
     );
   }

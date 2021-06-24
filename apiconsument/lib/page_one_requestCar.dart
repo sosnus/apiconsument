@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'data/servers.dart';
 import 'page_delete_car.dart';
 import 'data/api_service.dart';
-import 'data/car.dart';
 
 class PageOneRequesCar extends StatelessWidget {
   final int requestId;
@@ -18,7 +17,7 @@ class PageOneRequesCar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _selectedIndex;
+    // var _selectedIndex;
     return Scaffold(
       appBar: AppBar(
         title: Text('About request #' + requestId.toString()),
@@ -57,7 +56,7 @@ class PageOneRequesCar extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => PageDeleteCar(
                       choosenServer: choosenServer,
-                      plate_number: requestId.toString(),
+                      plateNumber: requestId.toString(),
                     ),
                   ),
                 ),

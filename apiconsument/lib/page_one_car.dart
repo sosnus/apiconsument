@@ -9,17 +9,17 @@ import 'data/car.dart';
 
 class PageOneCar extends StatelessWidget {
   final Server choosenServer;
-  final String plate_number;
+  final String plateNumber;
 
   const PageOneCar(
-      {Key? key, required this.plate_number, required this.choosenServer})
+      {Key? key, required this.plateNumber, required this.choosenServer})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About car: ' + plate_number),
+        title: Text('About car: ' + plateNumber),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -29,7 +29,7 @@ class PageOneCar extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             title: const Text('Are You sure to delete car?'),
-            content: Text('Plate number: ' + plate_number),
+            content: Text('Plate number: ' + plateNumber),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -40,7 +40,7 @@ class PageOneCar extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => PageDeleteCar(
                       choosenServer: choosenServer,
-                      plate_number: plate_number,
+                      plateNumber: plateNumber,
                     ),
                   ),
                 ),
@@ -57,7 +57,7 @@ class PageOneCar extends StatelessWidget {
     return FutureBuilder<Response>(
       // In real apps, use some sort of state management (BLoC is cool)
       // to prevent duplicate requests when the UI rebuilds
-      future: Provider.of<ApiService>(context).carByPlateNumber(plate_number),
+      future: Provider.of<ApiService>(context).carByPlateNumber(plateNumber),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // Snapshot's data is the Response

@@ -66,22 +66,22 @@ class _$ApiService extends ApiService {
   }
 
   @override
-  Future<Response<dynamic>> carByPlateNumber(String plate_number) {
-    final $url = '/car/$plate_number';
+  Future<Response<dynamic>> carByPlateNumber(String plateNumber) {
+    final $url = '/car/$plateNumber';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
 
   @override
-  Future<Response<dynamic>> deleteCarByPlateNumber(String plate_number) {
-    final $url = '/_car/$plate_number';
+  Future<Response<dynamic>> deleteCarByPlateNumber(String plateNumber) {
+    final $url = '/_car/$plateNumber';
     final $request = Request('DELETE', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
 
   @override
-  Future<Response<dynamic>> deleteUserById(String user_id) {
-    final $url = '/_user/$user_id';
+  Future<Response<dynamic>> deleteUserById(String userId) {
+    final $url = '/_user/$userId';
     final $request = Request('DELETE', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
