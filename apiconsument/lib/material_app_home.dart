@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
+// import 'data/api_serviceHQ.dart';
 
 class MaterialAppHome extends StatelessWidget {
   final Server choosenServer;
@@ -13,7 +14,8 @@ class MaterialAppHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider(
       // The initialized PostApiService is now available down the widget tree
-      create: (_) => ApiService.create(),
+      create: (_) => ApiService.create(choosenServer.address),
+      // create: (_) => ApiServiceHQ.create(),
       // builder: (_) => ApiService.create(),
       // Always call dispose on the ChopperClient to release resources
       dispose: (context, ApiService service) => service.client.dispose(),

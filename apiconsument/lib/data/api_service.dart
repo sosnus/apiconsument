@@ -5,8 +5,11 @@ import 'package:chopper/chopper.dart';
 part 'api_service.chopper.dart';
 
 // @ChopperApi(baseUrl: 'https://jsonplaceholder.typicode.com')
+// const String testAddr = 'https://iap-warsaw-hq.azurewebsites.net';
 
-@ChopperApi(baseUrl: 'https://iap-warsaw-hq.azurewebsites.net')
+// @ChopperApi(baseUrl: testAddr)
+@ChopperApi()
+// @ChopperApi(baseUrl: 'https://iap-warsaw-hq.azurewebsites.net')
 // @ChopperApi(baseUrl: 'http://s-vm.northeurope.cloudapp.azure.com:8081')
 abstract class ApiService extends ChopperService {
   @Get(path: '/user/{id}')
@@ -66,10 +69,10 @@ abstract class ApiService extends ChopperService {
     @Body() Map<String, dynamic> body,
   );
 
-  static ApiService create() {
+  static ApiService create(String address) {
     final client = ChopperClient(
       // The first part of the URL is now here
-      baseUrl: 'https://jsonplaceholder.typicode.com',
+      baseUrl: address,
       services: [
         // The generated implementation
         _$ApiService(),
