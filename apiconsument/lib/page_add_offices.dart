@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 enum OfficeType { HQ, BO }
 
 class PageAddOffices extends StatelessWidget {
-  // final String listName;
-
   const PageAddOffices({Key? key}) : super(key: key);
 
   @override
@@ -19,9 +17,7 @@ class PageAddOffices extends StatelessWidget {
 
   _addOfficeForm(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-// enum SingingCharacter { lafayette, jefferson }
     OfficeType _officeType = OfficeType.BO;
-    // SingingCharacter? _character = SingingCharacter.lafayette;
     return Form(
       key: _formKey,
       child: Column(
@@ -42,16 +38,11 @@ class PageAddOffices extends StatelessWidget {
             },
           ),
           ListTile(
-            // CONVERT TO STATEFULL!!!!
             title: const Text('Branch Office'),
             leading: Radio<OfficeType>(
               value: OfficeType.BO,
               groupValue: _officeType,
-              onChanged: (OfficeType? value) {
-                // setState(() {
-                //   _character = value;
-                // });
-              },
+              onChanged: (OfficeType? value) {},
             ),
           ),
           ListTile(
@@ -59,12 +50,7 @@ class PageAddOffices extends StatelessWidget {
             leading: Radio<OfficeType>(
               value: OfficeType.HQ,
               groupValue: _officeType,
-              onChanged: (OfficeType? value) {
-                // setState(() {
-                //   _character = value;
-                // }
-                // );
-              },
+              onChanged: (OfficeType? value) {},
             ),
           ),
           Padding(

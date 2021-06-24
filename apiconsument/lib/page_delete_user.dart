@@ -1,17 +1,15 @@
+import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'data/api_service.dart';
-import 'data/servers.dart';
+import 'page_add_offices.dart';
 import 'page_home.dart';
 import 'page_list_users.dart';
-import 'page_add_offices.dart';
 
 class PageDeleteUser extends StatelessWidget {
   final String userId;
   final Server choosenServer;
-  // MaterialAppHome(this.choosenServer);
 
   const PageDeleteUser(
       {Key? key, required this.choosenServer, required this.userId})
@@ -62,7 +60,6 @@ class PageDeleteUser extends StatelessWidget {
           ),
           child: Text("Go to user list"),
         ),
-        // Text(myRespond),
         ElevatedButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
@@ -77,14 +74,6 @@ class PageDeleteUser extends StatelessWidget {
     );
   }
 }
-
-// void _navigateToPost(BuildContext context, int id) {
-//   Navigator.of(context).push(
-//     MaterialPageRoute(
-//       builder: (context) => SinglePostPage(postId: id),
-//     ),
-//   );
-// }
 
 void _navigateToAddOffice(BuildContext context) {
   Navigator.of(context).push(

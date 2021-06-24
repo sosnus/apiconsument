@@ -21,19 +21,5 @@ class Office {
     return this.toJson().toString();
   }
 
-  // Widget toWidgetCard() {
-  //           return Card(
-  //         elevation: 4,
-  //         child: ListTile(
-  //           title: Text(
-  //             posts[index]['city'],
-  //             style: TextStyle(fontWeight: FontWeight.bold),
-  //           ),
-  //           subtitle: Text(posts[index]['type']),
-  //           onTap: () => _navigateToPost(context, posts[index]['id']),
-  //         ),
-  //       );
-  // }
-
   static obj(offic) {}
 }

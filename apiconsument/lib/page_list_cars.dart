@@ -1,15 +1,11 @@
 import 'dart:convert';
-
-// import 'package:apiconsument/page_add_offices.dart';
-// import 'package:apiconsument/page_one_car.dart';
+import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'data/api_service.dart';
-import 'data/servers.dart';
-import 'page_one_car.dart';
 import 'page_add_offices.dart';
+import 'page_one_car.dart';
 
 class PageListCars extends StatelessWidget {
   final String listName;
@@ -44,8 +40,6 @@ class PageListCars extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           // Snapshot's data is the Response
           // You can see there's no type safety here (only List<dynamic>)
-          // print(snapshot.data!.bodyString);
-          // if (snapshot.data.bodyString != null)
           final List posts = json.decode(snapshot.data!.bodyString);
           return _buildPosts(context, posts);
         } else {

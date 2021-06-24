@@ -29,7 +29,6 @@ class PageListRequestsPendingsCars extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add),
-        // onPressed: () => _navigateToAddOffice(context),
       ),
     );
   }
@@ -44,7 +43,6 @@ class PageListRequestsPendingsCars extends StatelessWidget {
           final List<RequestCar> requestCar = [];
           for (var item in requestsCarsCollection) {
             requestCar.add(RequestCar.fromJson(item));
-            // offices.add(Office(item['id'], item['city'], item['type']));
           }
           return _buildRequestCarList(context, requestCar);
         } else {
@@ -63,67 +61,12 @@ class PageListRequestsPendingsCars extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           child: posts[index].showAsCard(),
-          //  Card(
-          //   elevation: 4,
-          //   child: ListTile(
-          //     title: Text(
-          //       posts[index]['title'],
-          //       style: TextStyle(fontWeight: FontWeight.bold),
-          //     ),
-          //     subtitle: Text(posts[index]['body']),
-          //   ),
-          // ),
           onTap: () =>
               _navigateToRequestDetails(context, posts[index].requestId),
         );
       },
     );
   }
-
-  // ListView _buildRequestCarList(
-  //     BuildContext context, List<RequestCar> requestCar) {
-  //   return ListView.builder(
-  //     itemCount: requestCar.length,
-  //     padding: EdgeInsets.all(8),
-  //     itemBuilder: (context, index) {
-  //       // return Office.obj(offices[index]).toWidgetCard();
-  //       return Card(
-  //         elevation: 4,
-  //         child: ListTile(
-  //           // leading: offices[index].type == "HQ"
-  //           //     ? Icon(Icons.home_work)
-  //           //     : Icon(Icons.home_filled),
-  //           title: Text(
-  //             requestCar[index].getSomeInfo,
-  //             // offices[index].id.toString() +
-  //             //     '. ' +
-  //             //     offices[index].city.toString(),
-  //             // style: TextStyle(fontWeight: FontWeight.bold),
-  //           ),
-  //           // subtitle: Text(offices[index].type),
-  //           onTap: () => _navigateToPost(context, 1),
-  //           // onTap: () => _navigateToPost(context, offices[index].id),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  // void _navigateToPost(BuildContext context, int id) {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (context) => SinglePostPage(postId: id),
-  //     ),
-  //   );
-  // }
-
-  // void _navigateToAddOffice(BuildContext context) {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (context) => PageAddOffices(),
-  //     ),
-  //   );
-  // }
 
   _navigateToRequestDetails(BuildContext context, int requestId) {
     Navigator.of(context).push(

@@ -15,23 +15,15 @@ class MaterialAppHome extends StatelessWidget {
     return Provider(
       // The initialized PostApiService is now available down the widget tree
       create: (_) => ApiService.create(choosenServer.address),
-      // create: (_) => ApiServiceHQ.create(),
-      // builder: (_) => ApiService.create(),
-      // Always call dispose on the ChopperClient to release resources
       dispose: (context, ApiService service) => service.client.dispose(),
       child: MaterialApp(
         theme: ThemeData.from(
           colorScheme: choosenServer.colorScheme,
         ),
-        //   // colorScheme: choosenServer,
-        //   colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
-        //   // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
         title: choosenServer.type + ' ' + choosenServer.city,
-        // home: PageHome(),
         home: PageMenu(
           choosenServer: choosenServer,
         ),
-        // home: HomePage(),
       ),
     );
   }

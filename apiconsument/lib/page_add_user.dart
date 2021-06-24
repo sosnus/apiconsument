@@ -1,17 +1,13 @@
 import 'dart:convert';
-
-import 'package:chopper/chopper.dart';
-import 'package:intl/intl.dart';
-import 'package:apiconsument/data/roles_collection.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'data/api_service.dart';
 import 'data/servers.dart';
 import 'data/user.dart';
-
+import 'package:apiconsument/data/roles_collection.dart';
+import 'package:chopper/chopper.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'page_after_add_user.dart';
 
 enum Gender { M, W }
@@ -40,8 +36,6 @@ class _PageAddUserState extends State<PageAddUser> {
 
   _PageAddUserState(this.choosenServer);
 
-// ????
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +54,7 @@ class _PageAddUserState extends State<PageAddUser> {
   List roleList = [];
 
   TextEditingController formTemporartUserIdEditingController =
-      TextEditingController(); // form_id_EditingController
+      TextEditingController();
 
   TextEditingController formFirstNameEditingController =
       TextEditingController();
@@ -82,7 +76,6 @@ class _PageAddUserState extends State<PageAddUser> {
   TextEditingController formOfficeIdEditingController = TextEditingController();
 
   _formAddNewUser(BuildContext context) {
-    // roleL
     return Form(
       key: _formKey,
       child: ListView(
@@ -141,9 +134,7 @@ class _PageAddUserState extends State<PageAddUser> {
               return null;
             },
           ),
-
           roleRadiobuttonGender(),
-          // roleDropdownWidget(),
           roleDropdownWidget(),
           ElevatedButton(
               onPressed: () => showDialog<String>(
@@ -155,15 +146,8 @@ class _PageAddUserState extends State<PageAddUser> {
                         width: 300,
                         child: Container(
                           child: _buildList(context),
-                          // child: ListView(
-                          // crossAxisAlignment:
-                          // CrossAxisAlignment.stretch,
-                          // children: <Widget>[_buildList(context)]),
                         ),
                       ),
-                      // ),
-                      // content:  _buildList(context),
-                      //HEHRE Text('User id: ' + "1"),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -180,17 +164,6 @@ class _PageAddUserState extends State<PageAddUser> {
                   selectedOfficeId.toString() +
                   ' ' +
                   selectedOfficeName)),
-          // form_officeId_EditingController.text)),
-          // ElevatedButton(
-          //     //form_officeId_EditingController
-          //     onPressed: () => {
-          //           form_officeId_EditingController.text =
-          //               selectOfficeWindow().toString()
-          //           // selectedOfficeId = selectOfficeWindow()
-          //         },
-          //     child: Text("Selected office🏢 : " +
-          //         form_officeId_EditingController.text)),
-          // roleSelectNewWindow(),
           TextFormField(
             controller: formPeselEditingController,
             decoration: const InputDecoration(
@@ -206,29 +179,13 @@ class _PageAddUserState extends State<PageAddUser> {
           ElevatedButton(
               onPressed: () {
                 setState(() {
-                  selectDatetime()
-                      .then((value) => formBirtDateEditingController.text =
-                          // dateAsString =
-                          DateFormat('yyyy-MM-dd').format(value!));
-                  // dateAsString;
+                  selectDatetime().then((value) => formBirtDateEditingController
+                      .text = DateFormat('yyyy-MM-dd').format(value!));
                 });
               },
               child: Text(
-                //form_birthDate_EditingController.text
                 "📅    " + formBirtDateEditingController.text,
               )),
-          // TextFormField(
-          //   controller: form_birthDate_EditingController,
-          //   decoration: const InputDecoration(
-          //     labelText: 'birth, birth, birth',
-          //   ),
-          //   validator: (value) {
-          //     if (value == null || value.isEmpty) {
-          //       return 'Please enter some text';
-          //     }
-          //     return null;
-          //   },
-          // ),
         ],
       ),
     );
@@ -237,11 +194,6 @@ class _PageAddUserState extends State<PageAddUser> {
   String dropdownValue = RolesCollection.getRole(0).asString();
 
   Widget roleRadiobuttonGender() => Column(
-        //  Container(
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        // child: new ListView(
-        // scrollDirection: Axis.horizontal,
         children: <Widget>[
           ListTile(
             title: const Text('M'),
@@ -268,7 +220,6 @@ class _PageAddUserState extends State<PageAddUser> {
             ),
           ),
         ],
-        // ),
       );
 
   Widget roleRadiobuttonRole() => Column(
@@ -307,14 +258,16 @@ class _PageAddUserState extends State<PageAddUser> {
       iconSize: 24,
       elevation: 16,
       onChanged: (String? newValue) {
-        setState(() {
-          dropdownValue = newValue!;
-          if (RolesCollection.getRole(0).asString() == dropdownValue) {
-            selectedRoleId = RolesCollection.getRole(0).id;
-          } else {
-            selectedRoleId = RolesCollection.getRole(1).id;
-          }
-        });
+        setState(
+          () {
+            dropdownValue = newValue!;
+            if (RolesCollection.getRole(0).asString() == dropdownValue) {
+              selectedRoleId = RolesCollection.getRole(0).id;
+            } else {
+              selectedRoleId = RolesCollection.getRole(1).id;
+            }
+          },
+        );
       },
       items: <String>[
         RolesCollection.getRole(0).asString(),
@@ -349,18 +302,10 @@ class _PageAddUserState extends State<PageAddUser> {
         formMiddleNameEditingController.text,
         formSurnameEditingController.text,
         formPeselEditingController.text,
-        // form_gender_EditingController.text,
         extractFromEnum(_selectedGender!),
-        // dateAsString,
         formBirtDateEditingController.text,
-        // form_birthDate_EditingController.text,
-        // 1,
         selectedRoleId,
-        // 1,
-        selectedOfficeId
-        // int.parse(form_roleId_EditingController.text),
-        // int.parse(form_officeId_EditingController.text),
-        );
+        selectedOfficeId);
     print(myUser.toString());
 
     Navigator.of(context).push(
@@ -369,8 +314,6 @@ class _PageAddUserState extends State<PageAddUser> {
             PageAfterAddUser(choosenServer: choosenServer, user: myUser),
       ),
     );
-    // Provider.of<ApiService>(context).postNewUser(myUser.toJson());
-    print("@@@@@selectedRoleId " + selectedRoleId.toString());
   }
 
   Future<DateTime?> selectDatetime() async {
@@ -385,14 +328,6 @@ class _PageAddUserState extends State<PageAddUser> {
         locale: LocaleType.en);
   }
 
-  // int selectOfficeWindow() {
-  //   _showMyDialog();
-  //   setState(() {
-  //     selectedOfficeId++;
-  //   });
-  //   return selectedOfficeId;
-  // }
-
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
       future: Provider.of<ApiService>(context).officeAll(),
@@ -400,10 +335,10 @@ class _PageAddUserState extends State<PageAddUser> {
         if (snapshot.connectionState == ConnectionState.done) {
           final List posts = json.decode(snapshot.data!.bodyString);
           return Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: _buildPosts(context, posts));
-          // return _buildPosts(context, posts);
+            width: double.infinity,
+            height: double.infinity,
+            child: _buildPosts(context, posts),
+          );
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -418,7 +353,6 @@ class _PageAddUserState extends State<PageAddUser> {
       itemCount: posts.length,
       padding: EdgeInsets.all(8),
       itemBuilder: (context, index) {
-        // return Text(index.toString());
         return Card(
           elevation: 4,
           child: ListTile(
@@ -433,75 +367,9 @@ class _PageAddUserState extends State<PageAddUser> {
                       selectedOfficeName = posts[index]['city'];
                       selectedOfficeId = posts[index]['id'];
                     })
-                  }
-              // onTap: () => _navigateToOneUserPage(context, posts[index]['id']),
-              ),
+                  }),
         );
       },
     );
   }
-
-  // // Future<void> _showMyDialog() async {
-  //   final Future<Widget> _calculation = Future<Widget>.delayed(
-  //     const Duration(seconds: 2),
-  //     () => Text('Data Loaded'),
-  //   );
-  //   return showDialog<void>(
-  //     context: context,
-  //     barrierDismissible: false, // user must tap button!
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         // future:
-  //         // future: Provider.of<ApiService>(context).userById(int.parse(user_id)),
-  //         title: const Text('AlertDialog Title'),
-  //         content: FutureBuilder<Widget>(
-  //           future: _calculation,
-  //           builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-  //             List<Widget> children;
-  //             if (snapshot.hasData) {
-  //               children = <Widget>[
-  //                 const Icon(
-  //                   Icons.check_circle_outline,
-  //                   color: Colors.green,
-  //                 ),
-  //                 Padding(
-  //                   padding: const EdgeInsets.only(top: 16),
-  //                   child: Text('Result: ${snapshot.data}'),
-  //                 )
-  //               ];
-  //             } else if (snapshot.hasError) {
-  //               children = <Widget>[
-  //                 const Icon(
-  //                   Icons.error_outline,
-  //                   color: Colors.red,
-  //                 ),
-  //                 Padding(
-  //                   padding: const EdgeInsets.only(top: 16),
-  //                   child: Text('Error: ${snapshot.error}'),
-  //                 )
-  //               ];
-  //             } else {
-  //               children = const <Widget>[
-  //                 SizedBox(
-  //                   child: CircularProgressIndicator(),
-  //                 ),
-  //                 Padding(
-  //                   padding: EdgeInsets.only(top: 16),
-  //                   child: Text('Awaiting result...'),
-  //                 )
-  //               ];
-  //             }
-  //             return Center(
-  //               child: Column(
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 crossAxisAlignment: CrossAxisAlignment.center,
-  //                 children: children,
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 }

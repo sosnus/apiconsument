@@ -20,15 +20,10 @@ class RolesCollection {
   }
 
   static List rolesListString() {
-    // List<String> list = new List<String>();
     List list = [];
-    // list.a
     rolesCollection.forEach((element) {
       list.add(element.toString());
     });
     return list;
-    // foreach
-    // return List<String>
-    // return rolesCollection;
   }
 }

@@ -1,10 +1,9 @@
+import 'data/api_service.dart';
+import 'data/servers.dart';
 import 'package:apiconsument/page_add_offices.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'data/api_service.dart';
-import 'data/servers.dart';
 import 'page_home.dart';
 import 'page_list_cars.dart';
 
@@ -77,14 +76,6 @@ class PageDeleteCar extends StatelessWidget {
     );
   }
 }
-
-// void _navigateToPost(BuildContext context, int id) {
-//   Navigator.of(context).push(
-//     MaterialPageRoute(
-//       builder: (context) => SinglePostPage(postId: id),
-//     ),
-//   );
-// }
 
 void _navigateToAddOffice(BuildContext context) {
   Navigator.of(context).push(

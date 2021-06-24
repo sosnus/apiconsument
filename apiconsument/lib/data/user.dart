@@ -12,21 +12,8 @@ class User {
   final int roleId;
   final int officeId;
 
-  // final Office officeObj;
-  // final Role roleObj;
-
-  // var a, b;
-
-  // User();
   User(this.id, this.firstName, this.middleName, this.surName, this.pesel,
       this.gender, this.birthDate, this.roleId, this.officeId);
-  //  2137);
-  // roleId = json['roleId'], // inside another field
-  // roleObj = json['roleId'],
-  // roleId = json['roleId'],
-  // roleId = roleObj.id,
-  // roleId = json['roleId'], // inside another field
-  // officeId = json['officeId'];
 
   User.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -73,23 +60,23 @@ class User {
   }
 
   Widget convertToWidgetList() {
-    // List fields = [];
     Map<String, dynamic> myJsonFields = this.toJson();
     Iterable<String> myJsonFieldsKeys = myJsonFields.keys;
     Iterable<dynamic> myJsonFieldsValues = myJsonFields.values;
     return ListView.builder(
-        itemCount: myJsonFields.length,
-        padding: EdgeInsets.all(8),
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 4,
-            child: ListTile(
-                title: Text(
-                  myJsonFieldsValues.elementAt(index).toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(myJsonFieldsKeys.elementAt(index))),
-          );
-        });
+      itemCount: myJsonFields.length,
+      padding: EdgeInsets.all(8),
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 4,
+          child: ListTile(
+              title: Text(
+                myJsonFieldsValues.elementAt(index).toString(),
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(myJsonFieldsKeys.elementAt(index))),
+        );
+      },
+    );
   }
 }

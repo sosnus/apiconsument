@@ -1,13 +1,12 @@
-import 'package:chopper/chopper.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'data/api_service.dart';
 import 'data/servers.dart';
 import 'data/user.dart';
+import 'package:chopper/chopper.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'page_add_offices.dart';
 import 'page_home.dart';
 import 'page_list_users.dart';
-import 'page_add_offices.dart';
 
 class PageAfterAddUser extends StatelessWidget {
   final User user;

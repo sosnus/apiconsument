@@ -6,12 +6,7 @@ class Role {
   final String description;
   final String previleges;
 
-  Role(this.id, this.title, this.description, this.previleges) {
-    // this.id = id;
-    // this.title = title;
-    // this.description = description;
-    // this.previleges = previleges;
-  }
+  Role(this.id, this.title, this.description, this.previleges);
 
   Future<Widget> showAsWidget() async {
     return Container(
@@ -20,7 +15,6 @@ class Role {
           Text(id.toString()),
           Text(title.toString()),
           Text(description.toString())
-          // ,Text(id.toString())
         ],
       ),
     );
@@ -29,6 +23,4 @@ class Role {
   String asString() {
     return '[' + id.toString() + '] ' + title;
   }
-
-  // Role.fromObject() {}
 }
