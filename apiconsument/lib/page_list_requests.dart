@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:apiconsument/page_add_offices.dart';
+import 'package:apiconsument/page_one_requestCar.dart';
 import 'package:apiconsument/single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -55,47 +56,79 @@ class PageListRequestsCars extends StatelessWidget {
     );
   }
 
-  ListView _buildRequestCarList(
-      BuildContext context, List<RequestCar> requestCar) {
+  ListView _buildRequestCarList(BuildContext context, List<RequestCar> posts) {
     return ListView.builder(
-      itemCount: requestCar.length,
+      itemCount: posts.length,
       padding: EdgeInsets.all(8),
       itemBuilder: (context, index) {
-        // return Office.obj(offices[index]).toWidgetCard();
-        return Card(
-          elevation: 4,
-          child: ListTile(
-            // leading: offices[index].type == "HQ"
-            //     ? Icon(Icons.home_work)
-            //     : Icon(Icons.home_filled),
-            title: Text(
-              requestCar[index].getSomeInfo,
-              // offices[index].id.toString() +
-              //     '. ' +
-              //     offices[index].city.toString(),
-              // style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            // subtitle: Text(offices[index].type),
-            onTap: () => _navigateToPost(context, 1),
-            // onTap: () => _navigateToPost(context, offices[index].id),
-          ),
+        return InkWell(
+          child: posts[index].showAsCard(),
+          //  Card(
+          //   elevation: 4,
+          //   child: ListTile(
+          //     title: Text(
+          //       posts[index]['title'],
+          //       style: TextStyle(fontWeight: FontWeight.bold),
+          //     ),
+          //     subtitle: Text(posts[index]['body']),
+          //   ),
+          // ),
+          onTap: () =>
+              _navigateToRequestDetails(context, posts[index].requestId),
         );
       },
     );
   }
 
-  void _navigateToPost(BuildContext context, int id) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SinglePostPage(postId: id),
-      ),
-    );
-  }
+  // ListView _buildRequestCarList(
+  //     BuildContext context, List<RequestCar> requestCar) {
+  //   return ListView.builder(
+  //     itemCount: requestCar.length,
+  //     padding: EdgeInsets.all(8),
+  //     itemBuilder: (context, index) {
+  //       // return Office.obj(offices[index]).toWidgetCard();
+  //       return Card(
+  //         elevation: 4,
+  //         child: ListTile(
+  //           // leading: offices[index].type == "HQ"
+  //           //     ? Icon(Icons.home_work)
+  //           //     : Icon(Icons.home_filled),
+  //           title: Text(
+  //             requestCar[index].getSomeInfo,
+  //             // offices[index].id.toString() +
+  //             //     '. ' +
+  //             //     offices[index].city.toString(),
+  //             // style: TextStyle(fontWeight: FontWeight.bold),
+  //           ),
+  //           // subtitle: Text(offices[index].type),
+  //           onTap: () => _navigateToPost(context, 1),
+  //           // onTap: () => _navigateToPost(context, offices[index].id),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  void _navigateToAddOffice(BuildContext context) {
+  // void _navigateToPost(BuildContext context, int id) {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => SinglePostPage(postId: id),
+  //     ),
+  //   );
+  // }
+
+  // void _navigateToAddOffice(BuildContext context) {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => PageAddOffices(), // TODO:
+  //     ),
+  //   );
+  // }
+
+  _navigateToRequestDetails(BuildContext context, int requestId) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageAddOffices(), // TODO:
+        builder: (context) => PageOneRequesCar(requestId: requestId), // TODO:
       ),
     );
   }

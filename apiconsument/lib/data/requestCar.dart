@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class RequestCar {
   // final int requestId;
   // final int branchId
@@ -49,4 +51,65 @@ class RequestCar {
         approvedDate =
             json['approvedDate'] == null ? "no" : json['approvedDate'],
         branchRequestId = json['branchRequestId'];
+
+  Map<String, dynamic> toJson() => {
+        'requestId': requestId,
+        'requestorId': requestorId,
+        'branchId': branchId,
+        'carModel': carModel,
+        'vehiclePreffered': vehiclePreffered,
+        'requestDate': requestDate,
+        'requestStatus': requestStatus,
+        'approvedBy': approvedBy,
+        'approvedDate': approvedDate,
+        'branchRequestId': branchRequestId
+      };
+
+  Map<String, dynamic> toJsonOnly4field() => {
+        // 'requestId': requestId,
+        'requestorId': requestorId,
+        'branchId': branchId,
+        'carModel': carModel,
+        'vehiclePreffered': vehiclePreffered,
+
+        // 'requestDate': requestDate,
+        // 'requestStatus': requestStatus,
+        // 'approvedBy': approvedBy,
+        // 'approvedDate': approvedDate,
+        // 'branchRequestId': branchRequestId
+      };
+  Widget showAsCard() {
+    return Card(
+      elevation: 4,
+      child: ListTile(
+        title: Text(
+          requestId.toString(),
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(carModel),
+        // onTap: () => _navigateToPost(context, posts[index]['id']),
+      ),
+    );
+  }
+
+  Widget convertToWidgetList() {
+    // List fields = [];
+    Map<String, dynamic> myJsonFields = this.toJson();
+    Iterable<String> myJsonFieldsKeys = myJsonFields.keys;
+    Iterable<dynamic> myJsonFieldsValues = myJsonFields.values;
+    return ListView.builder(
+        itemCount: myJsonFields.length,
+        padding: EdgeInsets.all(8),
+        itemBuilder: (context, index) {
+          return Card(
+            elevation: 4,
+            child: ListTile(
+                title: Text(
+                  myJsonFieldsValues.elementAt(index).toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(myJsonFieldsKeys.elementAt(index))),
+          );
+        });
+  }
 }

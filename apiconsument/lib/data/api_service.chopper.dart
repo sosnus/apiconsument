@@ -52,6 +52,20 @@ class _$ApiService extends ApiService {
   }
 
   @override
+  Future<Response<dynamic>> requestsPendingsAll() {
+    final $url = 'https://iap-warsaw-hq.azurewebsites.net/pendingrequests';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> requestById(int id) {
+    final $url = 'https://iap-warsaw-hq.azurewebsites.net/request/$id';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> carByPlateNumber(String plate_number) {
     final $url = 'https://iap-warsaw-hq.azurewebsites.net/car/$plate_number';
     final $request = Request('GET', $url, client.baseUrl);

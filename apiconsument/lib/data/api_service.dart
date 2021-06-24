@@ -24,6 +24,12 @@ abstract class ApiService extends ChopperService {
   @Get(path: '/requests')
   Future<Response> requestsAll();
 
+  @Get(path: '/pendingrequests')
+  Future<Response> requestsPendingsAll();
+
+  @Get(path: '/request/{id}')
+  Future<Response> requestById(@Path('id') int id);
+
   @Get(path: '/car/{plate_number}')
   Future<Response> carByPlateNumber(@Path('plate_number') String plate_number);
 
@@ -91,4 +97,6 @@ abstract class ApiService extends ChopperService {
     // The generated class with the ChopperClient passed in
     return _$ApiService(client);
   }
+
+  // requestsPendingsAll() {}
 }
