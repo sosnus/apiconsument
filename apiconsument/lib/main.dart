@@ -21,31 +21,40 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      // The initialized PostApiService is now available down the widget tree
-      create: (_) => ApiService.create(),
-      // builder: (_) => ApiService.create(),
-      // Always call dispose on the ChopperClient to release resources
-      dispose: (context, ApiService service) => service.client.dispose(),
-      child: MaterialApp(
-        // theme: ThemeData.from(
-        //   // colorScheme: choosenServer,
-        //   colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
-        //   // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
-        // ),
-        title: 'Material App',
-        // home: PageHome(),
-        home: PageSelectServer(),
-        //   onThemeChanged: (data) {
-        //   setState(() {
-        //     brightness = data.brightness;
-        //   });
-        // },
-        // home: HomePage(),
-      ),
+    return const MaterialApp(
+      // title: _title,
+      home: PageSelectServer(),
     );
+    // return Scaffold(){
+
+    // }
+    // body:  PageSelectServer,
+    // return PageSelectServer();
+    // return Provider(
+    //   create: (_) => ApiService.create(),
+    //   // builder: (_) => ApiService.create(),
+    //   child: MaterialApp(
+    //     title: 'Material App',
+    //     home: PageSelectServer(),
+    //   ),
+    // );
   }
 }
+// The initialized PostApiService is now available down the widget tree
+// Always call dispose on the ChopperClient to release resources
+// dispose: (context, ApiService service) => service.client.dispose(),
+// theme: ThemeData.from(
+//   // colorScheme: choosenServer,
+//   colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
+//   // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
+// ),
+// home: PageHome(),
+//   onThemeChanged: (data) {
+//   setState(() {
+//     brightness = data.brightness;
+//   });
+// },
+// home: HomePage(),
 
 void _setupLogging() {
   // Logger.root.level = Level.ALL;
@@ -79,7 +88,7 @@ class PageSelectServer extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyPageSelectServerState extends State<PageSelectServer> {
-  int _count = 0;
+  // int _count = 0;
   Server choosenServer = Servers.serversList.first;
   @override
   Widget build(BuildContext context) {
@@ -88,11 +97,11 @@ class _MyPageSelectServerState extends State<PageSelectServer> {
         title: const Text('IAP Car App'),
       ),
       body: Center(child: widgetSelectServer()),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => _count++),
-        tooltip: 'Increment Counter',
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => setState(() => _count++),
+      //   tooltip: 'Increment Counter',
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 
@@ -109,7 +118,7 @@ class _MyPageSelectServerState extends State<PageSelectServer> {
     return Column(
       children: [
         Text('Choose server'),
-        Text('You have pressed the button $_count times.'),
+        // Text('You have pressed the button $_count times.'),
         DropdownButton<Server>(
           hint: Text("Select item"),
           value: choosenServer,
