@@ -4,10 +4,31 @@ import 'data/servers.dart';
 import 'material_app_home.dart';
 // import 'data/api_service.dart';
 
-class PageLogin extends StatelessWidget {
+class PageLogin extends StatefulWidget {
   final Server choosenServer;
 
-  const PageLogin({Key? key, required this.choosenServer}) : super(key: key);
+  // const
+  PageLogin({Key? key, required this.choosenServer}) : super(key: key);
+
+  @override
+  _PageLoginState createState() => _PageLoginState(choosenServer);
+}
+
+class _PageLoginState extends State<PageLogin> {
+  final Server choosenServer;
+
+  _PageLoginState(this.choosenServer);
+
+  TextEditingController formLoginController = TextEditingController();
+
+  TextEditingController formPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    // myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +53,9 @@ class PageLogin extends StatelessWidget {
     return Column(children: [
       Text("Login here"),
       Text(choosenServer.address),
+      loginForm(),
+      // TextButton(onPressed: onPressed, child: child)
+
       ElevatedButton(
           // MaterialApp(
           onPressed: () {
@@ -50,5 +74,28 @@ class PageLogin extends StatelessWidget {
           },
           child: Text("Do not push it"))
     ]);
+  }
+
+  Widget loginForm() {
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(3.0),
+      child: Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Login',
+            ),
+            controller: formLoginController,
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Password',
+            ),
+            controller: formPasswordController,
+          ),
+        ],
+      ),
+    );
   }
 }
