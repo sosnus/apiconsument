@@ -51,28 +51,15 @@ class _PageLoginState extends State<PageLogin> {
 
   Widget loginWidget() {
     return Column(children: [
-      Text("Login here"),
+      // Text("Login here"),
       Text(choosenServer.address),
       loginForm(),
-      // TextButton(onPressed: onPressed, child: child)
 
       ElevatedButton(
-          // MaterialApp(
           onPressed: () {
             runApp(MaterialAppHome(choosenServer));
-            // Navigator.push(
-            //   context,
-            //   // MaterialPageRoute(
-            //   //     builder: (context) => PageHome(
-            //   //           server: choosenServer,
-            //   //         )),
-            //   MaterialPageRoute(
-            //       builder: (context) => MaterialAppHome(
-            //             server: choosenServer,
-            //           )),
-            // );
           },
-          child: Text("Do not push it"))
+          child: Text("🚪 Login"))
     ]);
   }
 
