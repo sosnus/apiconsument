@@ -55,8 +55,19 @@ class _MyPageSelectServerState extends State<PageSelectServer> {
 
   widgetSelectServer() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Choose server'),
+        Spacer(
+          flex: 2,
+        ),
+        Text(
+          'Choose Your office',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Spacer(
+          flex: 1,
+        ),
         DropdownButton<Server>(
           hint: Text("Select item"),
           value: choosenServer,
@@ -81,6 +92,9 @@ class _MyPageSelectServerState extends State<PageSelectServer> {
             },
           ).toList(),
         ),
+        Spacer(
+          flex: 1,
+        ),
         ElevatedButton(
           onPressed: () {
             Navigator.push(
@@ -92,7 +106,10 @@ class _MyPageSelectServerState extends State<PageSelectServer> {
               ),
             );
           },
-          child: Text("Choose"),
+          child: Text("Go to login"),
+        ),
+        Spacer(
+          flex: 9,
         ),
       ],
     );
