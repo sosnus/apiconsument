@@ -5,7 +5,7 @@ import 'package:chopper/chopper.dart';
 import 'package:provider/provider.dart';
 
 import 'data/api_service.dart';
-import 'a_single_post_page.dart';
+// import 'a_single_post_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -64,18 +64,18 @@ class HomePage extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(posts[index]['body']),
-            onTap: () => _navigateToPost(context, posts[index]['id']),
+            // onTap: () => _navigateToPost(context, posts[index]['id']),
           ),
         );
       },
     );
   }
 
-  void _navigateToPost(BuildContext context, int id) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SinglePostPage(postId: id),
-      ),
-    );
-  }
+//   void _navigateToPost(BuildContext context, int id) {
+//     Navigator.of(context).push(
+//       MaterialPageRoute(
+//         // builder: (context) => SinglePostPage(postId: id),
+//       ),
+//     );
+//   }
 }

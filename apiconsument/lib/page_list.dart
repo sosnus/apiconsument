@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'data/api_service.dart';
-import 'package:apiconsument/a_single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,18 +51,18 @@ class PageList extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(posts[index]['body']),
-            onTap: () => _navigateToPost(context, posts[index]['id']),
+            // onTap: () => _navigateToPost(context, posts[index]['id']),
           ),
         );
       },
     );
   }
 
-  void _navigateToPost(BuildContext context, int id) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SinglePostPage(postId: id),
-      ),
-    );
-  }
+//   void _navigateToPost(BuildContext context, int id) {
+//     Navigator.of(context).push(
+//       MaterialPageRoute(
+//         builder: (context) => SinglePostPage(postId: id),
+//       ),
+//     );
+//   }
 }

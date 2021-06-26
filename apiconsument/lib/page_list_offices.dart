@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'data/api_service.dart';
 import 'data/office.dart';
 import 'package:apiconsument/page_add_offices.dart';
-import 'package:apiconsument/a_single_post_page.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,20 +66,20 @@ class PageListOffices extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(offices[index].type),
-            onTap: () => _navigateToPost(context, offices[index].id),
+            // onTap: () => _navigateToPost(context, offices[index].id),
           ),
         );
       },
     );
   }
 
-  void _navigateToPost(BuildContext context, int id) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SinglePostPage(postId: id),
-      ),
-    );
-  }
+  // void _navigateToPost(BuildContext context, int id) {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => SinglePostPage(postId: id),
+  //     ),
+  //   );
+  // }
 
   void _navigateToAddOffice(BuildContext context) {
     Navigator.of(context).push(
