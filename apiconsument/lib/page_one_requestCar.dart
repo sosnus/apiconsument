@@ -10,9 +10,14 @@ import 'page_delete_car.dart';
 class PageOneRequesCar extends StatelessWidget {
   final int requestId;
   final Server choosenServer;
+  final bool isPending;
 
   const PageOneRequesCar(
-      {Key? key, required this.requestId, required this.choosenServer})
+      // Server choosenServer,
+      {Key? key,
+      required this.requestId,
+      required this.choosenServer,
+      required this.isPending})
       : super(key: key);
 
   @override
@@ -22,20 +27,23 @@ class PageOneRequesCar extends StatelessWidget {
         title: Text('About request #' + requestId.toString()),
       ),
       body: _buildList(context),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-        ],
-      ),
+      bottomNavigationBar: isPending
+          ? BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.business),
+                  label: 'Business',
+                ),
+              ],
+            )
+          : null,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.delete),
+        backgroundColor: Colors.red,
         onPressed: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
