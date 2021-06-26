@@ -7,18 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PageListOffices extends StatelessWidget {
-  final String listName;
+  // final String listName;
 
   const PageListOffices({
     Key? key,
-    required this.listName,
+    // required this.listName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List: ' + listName),
+        title: Text('List: Offices'),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(

@@ -10,12 +10,12 @@ import 'data/api_service.dart';
 import 'data/requestCar.dart';
 
 class PageListRequestsPendingsCars extends StatelessWidget {
-  final String listName;
+  // final String listName;
   final Server choosenServer;
 
   const PageListRequestsPendingsCars({
     Key? key,
-    required this.listName,
+    // required this.listName,
     required this.choosenServer,
   }) : super(key: key);
 
@@ -23,7 +23,7 @@ class PageListRequestsPendingsCars extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List: ' + listName),
+        title: Text('List: Requests (pendings)'),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -72,7 +72,10 @@ class PageListRequestsPendingsCars extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PageOneRequesCar(
-            choosenServer: choosenServer, requestId: requestId),
+          choosenServer: choosenServer,
+          requestId: requestId,
+          isPending: false,
+        ),
       ),
     );
   }
