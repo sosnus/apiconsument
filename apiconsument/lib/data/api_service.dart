@@ -33,7 +33,7 @@ abstract class ApiService extends ChopperService {
 
   @Delete(path: '/_car/{plateNumber}')
   Future<Response> deleteCarByPlateNumber(
-      @Path('plate_number') String plateNumber);
+      @Path('plateNumber') String plateNumber);
 
   @Delete(path: '/_user/{userId}')
   Future<Response> deleteUserById(@Path('userId') String userId);
