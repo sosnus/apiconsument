@@ -1,4 +1,4 @@
-import 'package:apiconsument/page_home.dart';
+// import 'package:apiconsument/page_menu.dart';
 import 'package:flutter/material.dart';
 import 'data/servers.dart';
 import 'material_app_home.dart';
@@ -38,34 +38,43 @@ class _PageLoginState extends State<PageLogin> {
       ),
       body: loginWidget(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => PageMenu(
-              choosenServer: choosenServer,
-            ),
-          ),
-        ),
+        child: const Icon(Icons.login),
+        onPressed: () => runApp(MaterialAppHome(choosenServer)),
+        // onPressed: () => Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => PageMenu(
+        //       choosenServer: choosenServer,
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }
 
   Widget loginWidget() {
-    return Column(children: [
-      // Text("Login here"),
-      Text(choosenServer.address),
-      loginForm(),
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
 
-      ElevatedButton(
-          onPressed: () {
-            runApp(MaterialAppHome(choosenServer));
-          },
-          child: Text("🚪 Login"))
-    ]);
+        // padding: EdgeInsets.all(25.0),
+        children: [
+          // Text("Login here"),
+          Text(
+            choosenServer.address,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          loginForm(),
+          // ElevatedButton(
+          //     onPressed: () {
+          //       runApp(MaterialAppHome(choosenServer));
+          //     },
+          //     child: Text("🚪 Login"))
+        ]);
   }
 
   Widget loginForm() {
     return Container(
-      margin: const EdgeInsets.all(15.0),
+      margin: const EdgeInsets.all(30.0),
       padding: const EdgeInsets.all(3.0),
       child: Column(
         children: [
