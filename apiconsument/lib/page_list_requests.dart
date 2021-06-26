@@ -8,12 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PageListRequestsCars extends StatelessWidget {
-  final String listName;
+  // final String listName;
   final Server choosenServer;
+
+  final bool isPendings;
 
   const PageListRequestsCars({
     Key? key,
-    required this.listName,
+    // required this.listName,
+    required this.isPendings,
     required this.choosenServer,
   }) : super(key: key);
 
@@ -21,7 +24,9 @@ class PageListRequestsCars extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List: ' + listName),
+        title: Text('List: Requests Cars' + (isPendings ? ' Pendings' : ' ')),
+        // title: Text('List: Requests Cars'),
+        // title: Text('List: ' + listName),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -33,7 +38,9 @@ class PageListRequestsCars extends StatelessWidget {
 
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
-      future: Provider.of<ApiService>(context).requestsAll(),
+      future: isPendings
+          ? Provider.of<ApiService>(context).requestsPendingsAll()
+          : Provider.of<ApiService>(context).requestsAll(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final List requestsCarsCollection =
@@ -70,7 +77,10 @@ class PageListRequestsCars extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PageOneRequesCar(
-            choosenServer: choosenServer, requestId: requestId),
+          choosenServer: choosenServer,
+          requestId: requestId,
+          isPending: isPendings,
+        ),
       ),
     );
   }
