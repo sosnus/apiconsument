@@ -19,7 +19,7 @@ class User {
       : id = json['id'],
         firstName = json['firstName'],
         middleName = json['middleName'],
-        surName = json['surname'], //TO DO: remove capital N
+        surName = json['surname'] ?? json['surName'], //TO DO: remove capital N
         pesel = json['pesel'],
         gender = json['gender'],
         birthDate = json['birthDate'],
@@ -39,7 +39,7 @@ class User {
       };
 
   String toString() {
-    return (';   id' +
+    return ('   id' +
         id.toString() +
         ';   firstName' +
         firstName +
