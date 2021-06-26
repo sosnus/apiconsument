@@ -34,18 +34,24 @@ class RequestCar {
   }
 
   RequestCar.fromJson(Map<String, dynamic> json)
-      : requestId = json['requestId'],
-        requestorId = (json['requestorId'])['id'],
-        branchId = json['branchId'],
-        carModel = json['carModel'],
-        vehiclePreffered = json['vehiclePreffered'],
-        requestDate = json['requestDate'],
+      : requestId = json['requestId'] == null ? "ERROR" : json['requestId'],
+        requestorId = (json['requestorId'])['id'] == null
+            ? "ERROR"
+            : (json['requestorId'])['id'],
+        branchId = json['branchId'] == null ? "ERROR" : json['branchId'],
+        carModel = json['carModel'] == null ? "ERROR" : json['carModel'],
+        vehiclePreffered = json['vehiclePreffered'] == null
+            ? "ERROR"
+            : json['vehiclePreffered'],
+        requestDate =
+            json['requestDate'] == null ? "ERROR" : json['requestDate'],
         requestStatus =
             json['requestStatus'] == null ? "no" : json['requestStatus'],
         approvedBy = json['approvedBy'] == null ? "no" : json['approvedBy'],
         approvedDate =
             json['approvedDate'] == null ? "no" : json['approvedDate'],
-        branchRequestId = json['branchRequestId'];
+        branchRequestId =
+            json['branchRequestId'] == null ? 1111 : json['branchRequestId'];
 
   Map<String, dynamic> toJson() => {
         'requestId': requestId,
@@ -98,7 +104,9 @@ class RequestCar {
           elevation: 4,
           child: ListTile(
               title: Text(
-                myJsonFieldsValues.elementAt(index).toString(),
+                myJsonFieldsValues.elementAt(index) == Null
+                    ? "ERROR"
+                    : myJsonFieldsValues.elementAt(index).toString(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(myJsonFieldsKeys.elementAt(index))),

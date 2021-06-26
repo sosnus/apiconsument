@@ -6,9 +6,9 @@ class Office {
   Office(this.id, this.city, this.type);
 
   Office.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        city = json['city'],
-        type = json['type'];
+      : id = json['id'] ?? "ERROR",
+        city = json['city'] ?? "ERROR",
+        type = json['type'] ?? "ERROR";
 
   Map<String, dynamic> toJson() => {
         'id': id,
