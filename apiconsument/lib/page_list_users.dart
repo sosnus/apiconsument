@@ -103,7 +103,7 @@ class PageListUsers extends StatelessWidget {
           elevation: 4,
           child: ListTile(
             title: Text(
-              posts[index]['surName'],
+              posts[index]['surname'],
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(posts[index]['firstName']),
