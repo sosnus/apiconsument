@@ -10,12 +10,11 @@ import 'package:provider/provider.dart';
 import 'data/api_service.dart';
 
 class PageListUsers extends StatelessWidget {
-  final String listName;
+  // final String listName;
   final Server choosenServer;
 
   const PageListUsers({
     Key? key,
-    required this.listName,
     required this.choosenServer,
   }) : super(key: key);
 
@@ -23,7 +22,7 @@ class PageListUsers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List: ' + listName),
+        title: Text('List: Users'),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
@@ -103,7 +102,7 @@ class PageListUsers extends StatelessWidget {
           elevation: 4,
           child: ListTile(
             title: Text(
-              posts[index]['surname'],
+              posts[index]['surname'] ?? posts[index]['surName'],
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(posts[index]['firstName']),

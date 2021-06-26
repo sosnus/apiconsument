@@ -25,6 +25,7 @@ class PageOneUser extends StatelessWidget {
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.delete),
+        backgroundColor: Colors.red,
         onPressed: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(

@@ -8,12 +8,10 @@ import 'page_add_offices.dart';
 import 'page_one_car.dart';
 
 class PageListCars extends StatelessWidget {
-  final String listName;
   final Server choosenServer;
 
   const PageListCars({
     Key? key,
-    required this.listName,
     required this.choosenServer,
   }) : super(key: key);
 
@@ -21,7 +19,7 @@ class PageListCars extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('List: ' + listName),
+        title: Text('List: Cars'),
       ),
       body: _buildList(context),
       floatingActionButton: FloatingActionButton(
