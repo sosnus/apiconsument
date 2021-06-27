@@ -4,7 +4,7 @@ import 'data/servers.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'page_add_offices.dart';
+import 'page_add_car.dart';
 import 'page_one_car.dart';
 
 class PageListCars extends StatelessWidget {
@@ -88,7 +88,7 @@ class PageListCars extends StatelessWidget {
   void _navigateToAddOffice(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PageAddOffices(),
+        builder: (context) => PageAddCar(),
       ),
     );
   }

@@ -22,6 +22,7 @@ class PageListRequestsCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('List: Requests Cars' + (isPendings ? ' Pendings' : ' ')),
@@ -29,6 +30,21 @@ class PageListRequestsCars extends StatelessWidget {
         // title: Text('List: ' + listName),
       ),
       body: _buildList(context),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.car_rental),
+      //       label: 'Accept',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.cancel),
+      //       label: 'Reject',
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   // selectedItemColor: Colors.amber[800],
+      //   onTap: _onItemTapped(_selectedIndex),
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add),
@@ -48,6 +64,33 @@ class PageListRequestsCars extends StatelessWidget {
           final List<RequestCar> requestCar = [];
           for (var item in requestsCarsCollection) {
             requestCar.add(RequestCar.fromJson(item));
+          }
+          if (requestCar.length == 0) {
+            if (isPendings) {
+              return ListView(
+                children: [
+                  Center(
+                    child: Text(
+                      "No pendings requests!",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return ListView(
+                children: [
+                  Center(
+                    child: Text(
+                      "No requests!",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              );
+            }
           }
           return _buildRequestCarList(context, requestCar);
         } else {
@@ -84,4 +127,8 @@ class PageListRequestsCars extends StatelessWidget {
       ),
     );
   }
+
+  // _onItemTapped(int value) {
+  //   print(value);
+  // }
 }
