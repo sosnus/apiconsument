@@ -52,6 +52,14 @@ class _$ApiService extends ApiService {
   }
 
   @override
+  Future<Response<dynamic>> postNewRequestCar(Map<String, dynamic> myRequest) {
+    final $url = '/request';
+    final $body = myRequest;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> requestsPendingsAll() {
     final $url = '/pendingrequests';
     final $request = Request('GET', $url, client.baseUrl);

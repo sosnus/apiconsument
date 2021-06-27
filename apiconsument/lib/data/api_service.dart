@@ -22,6 +22,9 @@ abstract class ApiService extends ChopperService {
   @Get(path: '/requests')
   Future<Response> requestsAll();
 
+  @Post(path: '/request')
+  Future<Response> postNewRequestCar(@Body() Map<String, dynamic> myRequest);
+
   @Get(path: '/pendingrequests')
   Future<Response> requestsPendingsAll();
 
