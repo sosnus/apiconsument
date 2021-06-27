@@ -26,6 +26,42 @@ class RequestCar {
     this.branchRequestId,
   );
 
+  //  RequestCar simple(
+
+  //   requestorId,
+  //   branchId,
+  //   carModel,
+  //   vehiclePreffered,
+
+  // ){
+  //   RequestCar()
+  // }
+
+  // RequestCar.createForm4Fields( this.requestId,
+  //   this.requestorId,
+  //   this.branchId,
+  //   this.carModel,
+  //   this.vehiclePreffered,
+  //    ):
+  //    {
+
+  //    this.requestDate = "-1";
+
+  //     this.requestStatus = ; this.approvedBy = null; this.approvedDate = null; this.branchRequestId = null;
+  //    }
+
+  // RequestCar.createForm4Fields( this.requestId,
+  //   this.requestorId,
+  //   this.branchId,
+  //   this.carModel,
+  //   this.vehiclePreffered,
+  //    )
+  //    {
+
+  //    this.requestDate = null;
+  //     this.requestStatus = null; this.approvedBy = null; this.approvedDate = null; this.branchRequestId = null;
+  //    };
+
   String get getSomeInfo {
     return ("reqId: " +
         requestId.toString() +
