@@ -1,15 +1,17 @@
+import 'package:apiconsument/page_add_request.dart';
+
 import 'data/servers.dart';
 import 'package:flutter/material.dart';
 import 'package:restart_app/restart_app.dart';
 import 'page_list_cars.dart';
 import 'page_list_offices.dart';
 import 'page_list_requests.dart';
-import 'page_list_requestspendings.dart';
 import 'page_list_users.dart';
 
 enum MenuAction {
   Requests,
   RequestsPendings,
+  AddRequest,
   Users,
   Offices,
   Cars,
@@ -55,6 +57,7 @@ class PageMenu extends StatelessWidget {
   ];
   final List<MenuAction> menuBO = <MenuAction>[
     MenuAction.Requests,
+    MenuAction.AddRequest,
     MenuAction.Cars,
     MenuAction.Users,
     MenuAction.Logout
@@ -94,6 +97,8 @@ class PageMenu extends StatelessWidget {
   }
 
   void _navigateToPage(BuildContext context, MenuAction selectedItem) {
+    print(choosenServer.toString());
+
     switch (selectedItem) {
       case MenuAction.Requests:
         Navigator.of(context).push(
@@ -130,6 +135,15 @@ class PageMenu extends StatelessWidget {
             builder: (context) => PageListOffices(
                 // choosenServer: choosenServer,
                 ),
+          ),
+        );
+        break;
+      case MenuAction.AddRequest:
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => PageAddRequest(
+              choosenServer: choosenServer,
+            ),
           ),
         );
         break;
