@@ -10,6 +10,9 @@ abstract class ApiService extends ChopperService {
   @Get(path: '/user/{id}')
   Future<Response> userById(@Path('id') int id);
 
+  @Post(path: '/assign/{requestCarId}')
+  Future<Response> assignRequestCar(@Path('requestCarId') int requestCarId);
+
   @Get(path: '/users')
   Future<Response> usersAll();
 

@@ -22,7 +22,7 @@ class PageListRequestsCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _selectedIndex = 0;
+    // var _selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('List: Requests Cars' + (isPendings ? ' Pendings' : ' ')),

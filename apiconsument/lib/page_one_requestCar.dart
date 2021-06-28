@@ -5,6 +5,7 @@ import 'package:apiconsument/data/requestCar.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'page_after_accept_requestcar.dart';
 import 'page_delete_car.dart';
 
 class PageOneRequesCar extends StatelessWidget {
@@ -22,32 +23,41 @@ class PageOneRequesCar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // int _selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text('About request #' + requestId.toString()),
+        title: Text('About request # ' + requestId.toString()),
       ),
       body: _buildList(context),
-      bottomNavigationBar: isPending
-          ? BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.business),
-                  label: 'Business',
-                ),
-              ],
-            )
-          : null,
+      // bottomNavigationBar: isPending
+      //     ? BottomNavigationBar(
+      //         onTap: reviewRequest(context, _selectedIndex),
+      //         items: const <BottomNavigationBarItem>[
+      //           BottomNavigationBarItem(
+      //             icon: Icon(Icons.info),
+      //             label: 'Info',
+      //             // backgroundColor:
+      //           ),
+      //           BottomNavigationBarItem(
+      //               icon: Icon(Icons.car_rental),
+      //               label: 'Accept',
+      //               backgroundColor: Colors.green),
+      //           BottomNavigationBarItem(
+      //             icon: Icon(Icons.cancel),
+      //             backgroundColor: Colors.green,
+      //             label: 'Reject',
+      //           ),
+      //         ],
+      //         currentIndex: _selectedIndex,
+      //       )
+      //     : null,
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.delete),
-        backgroundColor: Colors.red,
+        child: const Icon(Icons.check_box_outlined),
+        backgroundColor: Colors.green,
         onPressed: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-            title: const Text('Are You sure to delete car?'),
+            title: const Text('Are You sure to allow this car request?'),
             content: Text('Plate number: ' + requestId.toString()),
             actions: <Widget>[
               TextButton(
@@ -55,14 +65,15 @@ class PageOneRequesCar extends StatelessWidget {
                 child: const Text('No'),
               ),
               TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PageDeleteCar(
-                      choosenServer: choosenServer,
-                      plateNumber: requestId.toString(),
-                    ),
-                  ),
-                ),
+                onPressed: () => _navigateToAfterAssignRequest(context),
+                // () => Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => PageDeleteCar(
+                //       choosenServer: choosenServer,
+                //       plateNumber: requestId.toString(),
+                //     ),
+                //   ),
+                // ),
                 child: const Text('Yes'),
               ),
             ],
@@ -93,4 +104,27 @@ class PageOneRequesCar extends StatelessWidget {
     print(myRequestCar.toString());
     return myRequestCar.convertToWidgetList();
   }
+
+  // void reviewRequest(int value, index) {
+  //   if (value == 0) {
+
+  //     _navigateToAfterAssignRequest(context);
+  //   }
+
+  void _navigateToAfterAssignRequest(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PageAfterAssignRequest(requestId, choosenServer),
+      ),
+    );
+  }
+
+  // reviewRequest(BuildContext context, int index) {
+  //   print("Nothing");
+  //   if (index == 1)
+  //     _navigateToAfterAssignRequest(context);
+  //   else
+  //     print("Nothing");
+  // }
 }
+// }

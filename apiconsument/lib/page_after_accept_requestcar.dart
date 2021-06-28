@@ -1,189 +1,127 @@
-import 'package:apiconsument/data/requestCar.dart';
-import 'package:apiconsument/page_after_add_request.dart';
-import 'package:flutter/material.dart';
-
+import 'dart:convert';
+import 'package:apiconsument/page_list_requests.dart';
+import 'data/api_service.dart';
 import 'data/servers.dart';
+import 'package:chopper/chopper.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'page_add_offices.dart';
+import 'page_menu.dart';
 
-class PageAddRequest extends StatefulWidget {
+class PageAfterAssignRequest extends StatelessWidget {
+  final int requestId;
   final Server choosenServer;
-  PageAddRequest({Key? key, required this.choosenServer}) : super(key: key);
 
-  // PageAddUser({
-  //   Key? key,
-  //   required this.choosenServer,
-  // }) : super(key: key);
-
-  @override
-  _PageAddRequestState createState() => _PageAddRequestState(choosenServer);
-  // _PageAddRequestState createState() => _PageAddRequestState(choosenServer);
-}
-
-class _PageAddRequestState extends State<PageAddRequest> {
-  Server choosenServer1 = Servers.serversList.first;
-  _PageAddRequestState(Server choosenServer) {
-    this.choosenServer1 = choosenServer;
-  }
-
-  // late Server choosenServer1;
-
-  // _PageAddRequestState() {
-  // this.choosenServer1 = choosenServer;
-  // }
-
-  // _PageAddUserState(this.choosenServer);
-
-// @override
-// State<StatefulWidget> createState() {
-//   throw UnimplementedError();
-// }
+  const PageAfterAssignRequest(
+    this.requestId,
+    this.choosenServer, {
+    Key? key,
+    // required this.listName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add: Request'),
+        title: Text('Assign: Done'),
       ),
-      body: _addRequestForm(context),
+      body: _buildList(context),
       floatingActionButton: FloatingActionButton(
-        // onPressed: () => _sendRequest(context),
-        onPressed: () {},
-        child: const Icon(Icons.send),
+        child: const Icon(Icons.add),
+        onPressed: () => _navigateToAddOffice(context),
       ),
     );
   }
 
-  TextEditingController formRequestorIdEditingController =
-      TextEditingController();
+  FutureBuilder<Response> _buildList(BuildContext context) {
+    return FutureBuilder<Response>(
+      future: Provider.of<ApiService>(context).assignRequestCar(requestId),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final String message = snapshot.data!.bodyString;
+          // final String message = json.decode(snapshot.data!.bodyString);
+          return _buildPage(context, message);
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
 
-  TextEditingController formBranchIdEditingController = TextEditingController();
+  // ListView _buildOfficeList(BuildContext context, String message) {
+  //   // return ListView.builder(
+  //   //   itemCount: offices.length,
+  //   //   padding: EdgeInsets.all(8),
+  //   //   itemBuilder: (context, index) {
+  //       return Card(
+  //         elevation: 4,
+  //         child: ListTile(
+  //           leading: offices[index].type == "HQ"
+  //               ? Icon(Icons.home_work)
+  //               : Icon(Icons.home_filled),
+  //           title: Text(
+  //             offices[index].id.toString() +
+  //                 '. ' +
+  //                 offices[index].city.toString(),
+  //             style: TextStyle(fontWeight: FontWeight.bold),
+  //           ),
+  //           subtitle: Text(offices[index].type),
+  //           // onTap: () => _navigateToPost(context, offices[index].id),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  TextEditingController formCarModelEditingController = TextEditingController();
-
-  TextEditingController formVehiclePrefferedEditingController =
-      TextEditingController();
-
-  _addRequestForm(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    // setState(() {
-    // });
-
-    formBranchIdEditingController.text =
-        widget.choosenServer.officeId.toString();
-    // OfficeType _officeType = OfficeType.BO;
+  Widget _buildPage(BuildContext context, String myRespond) {
     return Container(
-      margin: const EdgeInsets.all(30.0),
-      padding: const EdgeInsets.all(3.0),
-      child: Column(
-        children: [
-          Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextFormField(
-                  controller: formRequestorIdEditingController,
-                  decoration: const InputDecoration(
-                    labelText: 'requestorId',
+        margin: const EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(3.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(myRespond),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PageListRequestsCars(
+                    choosenServer: choosenServer, isPendings: true,
+                    // listName: 'Users',
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please fill this field';
-                    }
-                    return null;
-                  },
                 ),
-                TextFormField(
-                  controller: formBranchIdEditingController,
-                  decoration: const InputDecoration(
-                    labelText: 'branchId',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please fill this field';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: formCarModelEditingController,
-                  decoration: const InputDecoration(
-                    labelText: 'carModel',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please fill this field';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: formVehiclePrefferedEditingController,
-                  decoration: const InputDecoration(
-                    labelText: 'vehiclePreffered',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please fill this field';
-                    }
-                    return null;
-                  },
-                ),
-                // Padding(
-                // padding: const EdgeInsets.symmetric(
-                // vertical: 16.0, horizontal: 16.0),
-                // child:
-                ElevatedButton(
-                  onPressed: () {
-                    // Validate returns true if the form is valid, or false otherwise.
-                    if (_formKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Processing Data')));
-                      RequestCar tempRequestCar = RequestCar(
-                          -1,
-                          int.parse(formRequestorIdEditingController.text),
-                          int.parse(formBranchIdEditingController.text),
-                          formCarModelEditingController.text,
-                          formVehiclePrefferedEditingController.text,
-                          '-1',
-                          '-1',
-                          '-1',
-                          '-1',
-                          -1);
-
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PageAfterAddRequest(
-                            choosenServer: choosenServer1,
-                            requestCar: tempRequestCar,
-                            //tempRequestCar.toJsonOnly4field(),
-                          ),
-                        ),
-                      );
-                      // requestId, requestorId, branchId, carModel, vehiclePreffered, requestDate, requestStatus, approvedBy, approvedDate, branchRequestId)
-                      // RequestCar(requestId, requestorId, branchId, carModel, vehiclePreffered, requestDate, requestStatus, approvedBy, approvedDate, branchRequestId)
-                    }
-                  },
-                  child: Text('Submit'),
-                ),
-                // ),
-              ],
+              ),
+              child: Text("Go to requests car list"),
             ),
-          ),
-        ],
-      ),
-    );
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PageMenu(
+                    choosenServer: choosenServer,
+                    // server: Servers.serversList.first,
+                  ),
+                ),
+              ),
+              child: Text("Go to main menu"),
+            ),
+          ],
+        ));
   }
 
-  // _sendRequest(BuildContext context) {
+  // void _navigateToPost(BuildContext context, int id) {
   //   Navigator.of(context).push(
   //     MaterialPageRoute(
-  //       builder: (context) => PageAfterAddRequest(
-  //         choosenServer: choosenServer,
-  //         requestCar: tempRequestCar,
-  //       ),
+  //       builder: (context) => SinglePostPage(postId: id),
   //     ),
   //   );
   // }
+
+  void _navigateToAddOffice(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PageAddOffices(),
+      ),
+    );
+  }
 }

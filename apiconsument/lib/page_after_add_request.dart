@@ -1,15 +1,11 @@
-import 'package:apiconsument/data/requestCar.dart';
-import 'package:apiconsument/page_list_requests.dart';
-
 import 'data/api_service.dart';
+import 'data/requestCar.dart';
 import 'data/servers.dart';
-import 'data/user.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'page_add_offices.dart';
+import 'page_list_requests.dart';
 import 'page_menu.dart';
-import 'page_list_users.dart';
 
 class PageAfterAddRequest extends StatelessWidget {
   final RequestCar requestCar;
@@ -100,10 +96,10 @@ class PageAfterAddRequest extends StatelessWidget {
 //   );
 // }
 
-void _navigateToAddOffice(BuildContext context) {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => PageAddOffices(),
-    ),
-  );
-}
+// void _navigateToAddOffice(BuildContext context) {
+//   Navigator.of(context).push(
+//     MaterialPageRoute(
+//       builder: (context) => PageAddOffices(),
+//     ),
+//   );
+// }
