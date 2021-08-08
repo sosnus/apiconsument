@@ -8,43 +8,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PageListRequestsCars extends StatelessWidget {
-  // final String listName;
   final Server choosenServer;
-
   final bool isPendings;
 
   const PageListRequestsCars({
     Key? key,
-    // required this.listName,
     required this.isPendings,
     required this.choosenServer,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // var _selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('List: Requests Cars' + (isPendings ? ' Pendings' : ' ')),
-        // title: Text('List: Requests Cars'),
-        // title: Text('List: ' + listName),
       ),
       body: _buildList(context),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.car_rental),
-      //       label: 'Accept',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.cancel),
-      //       label: 'Reject',
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   // selectedItemColor: Colors.amber[800],
-      //   onTap: _onItemTapped(_selectedIndex),
-      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add),
@@ -127,8 +106,4 @@ class PageListRequestsCars extends StatelessWidget {
       ),
     );
   }
-
-  // _onItemTapped(int value) {
-  //   print(value);
-  // }
 }

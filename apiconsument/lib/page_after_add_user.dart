@@ -33,8 +33,6 @@ class PageAfterAddUser extends StatelessWidget {
   FutureBuilder<Response> _buildList(BuildContext context) {
     return FutureBuilder<Response>(
       future: Provider.of<ApiService>(context).postNewUser(user.toJson()),
-
-      // future: Provider.of<ApiService>(context).deleteUserById(user_id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final String myRespond = snapshot.data!.bodyString;
@@ -57,7 +55,6 @@ class PageAfterAddUser extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => PageListUsers(
                 choosenServer: choosenServer,
-                // listName: 'Users',
               ),
             ),
           ),
@@ -68,7 +65,6 @@ class PageAfterAddUser extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => PageMenu(
                 choosenServer: choosenServer,
-                // server: Servers.serversList.first,
               ),
             ),
           ),
@@ -78,14 +74,6 @@ class PageAfterAddUser extends StatelessWidget {
     );
   }
 }
-
-// void _navigateToPost(BuildContext context, int id) {
-//   Navigator.of(context).push(
-//     MaterialPageRoute(
-//       builder: (context) => SinglePostPage(postId: id),
-//     ),
-//   );
-// }
 
 void _navigateToAddOffice(BuildContext context) {
   Navigator.of(context).push(
